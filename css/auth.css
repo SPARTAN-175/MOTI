@@ -201,3 +201,36 @@
 
     font-size:14px;
 }
+
+/* ===================================
+   CHECKBOX
+   =================================== */
+
+.checkbox-group{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    margin-top:10px;
+
+    text-align:left;
+}
+
+.checkbox-group input{
+
+    margin-top:4px;
+}
+
+.checkbox-group label{
+
+    font-size:14px;
+
+    color:var(--text-light);
+
+    line-height:1.4;
+}
+
+
