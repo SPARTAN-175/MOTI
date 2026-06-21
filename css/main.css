@@ -118,3 +118,18 @@ body{
 
     font-size:12px;
 }
+
+/* ===================================
+   ENLACES COMO BOTÓN
+   =================================== */
+
+.btn-primary{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+}
