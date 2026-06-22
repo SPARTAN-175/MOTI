@@ -1,0 +1,124 @@
+.container{
+
+    max-width:420px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+.trip-card{
+
+    margin-top:20px;
+
+    border-radius:20px;
+
+    padding:20px;
+}
+
+/* LOCAL */
+
+.local{
+
+    background:#dcfce7;
+
+    border:2px solid #22c55e;
+}
+
+/* ESPECIAL */
+
+.especial{
+
+    background:#ffedd5;
+
+    border:2px solid #f97316;
+}
+
+/* TIPO */
+
+.trip-type{
+
+    display:inline-block;
+
+    background:white;
+
+    padding:8px 15px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+}
+
+/* INFO */
+
+.trip-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+.info-item{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.label{
+
+    font-size:14px;
+
+    color:#6b7280;
+}
+
+/* BOTONES */
+
+.actions{
+
+    margin-top:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.navigate-btn{
+
+    height:50px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.finish-btn{
+
+    height:55px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
