@@ -51,19 +51,21 @@
 
     width:100%;
 
-    height:70px;
+    height:65px;
 
     border:none;
 
-    border-radius:20px;
+    border-radius:16px;
 
-    background:var(--primary);
+    background:#16a34a;
 
     color:white;
 
-    font-size:22px;
+    font-size:20px;
 
     font-weight:700;
+
+    letter-spacing:1px;
 
     cursor:pointer;
 }
@@ -92,13 +94,21 @@
 
 .stat-card{
 
-    background:#f1f5f9;
+    height:110px;
 
-    border-radius:18px;
+    background:#f3f4f6;
 
-    padding:18px;
+    border-radius:16px;
 
-    text-align:center;
+    border:1px solid #e5e7eb;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
 }
 
 .stat-card span{
@@ -136,19 +146,27 @@
 
     position:relative;
 
+    height:90px;
+
     background:white;
 
-    border-radius:18px;
+    border-radius:16px;
 
-    padding:20px;
+    border:1px solid #e5e7eb;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     text-align:center;
 
-    box-shadow:var(--shadow);
+    font-weight:600;
+
+    color:var(--text);
 
     cursor:pointer;
-
-    transition:.3s;
 }
 
 .menu-card:hover{
@@ -201,4 +219,36 @@
     justify-content:center;
 
     align-items:center;
+}
+
+/* ==========================
+   CERRAR SESIÓN
+========================== */
+
+.logout-section{
+
+    margin-top:20px;
+}
+
+.logout-btn{
+
+    width:100%;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    color:#dc2626;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
 }
