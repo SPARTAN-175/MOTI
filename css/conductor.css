@@ -4,10 +4,12 @@
 
 .dashboard{
 
-    width:100%;
+    max-width:420px;
 
-    padding:12px;
+    margin:auto;
 
+    padding:20px;
+   
     padding-bottom:110px;
 }
 
