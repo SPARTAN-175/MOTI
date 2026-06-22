@@ -4,13 +4,13 @@
 
 .dashboard{
 
-    max-width:420px;
+    width:95%;
 
     margin:auto;
 
     padding:20px;
 
-    padding-bottom:160px;
+    padding-bottom:110px;
 }
 
 /* ==========================
