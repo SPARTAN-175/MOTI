@@ -1,142 +1,99 @@
-<!DOCTYPE html>
-<html lang="es">
+<div class="dashboard">
 
-<head>
+    <!-- Saludo -->
+    <header class="header">
 
-    <meta charset="UTF-8">
+        <h2>Hola Juan 👋</h2>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+        <p>Bienvenido a MOTI</p>
 
-    <title>MOTI | Conductor</title>
+    </header>
 
-    <!-- Fuente -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <!-- Estado -->
+    <section class="status-section">
 
-    <!-- Material Symbols -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+        <p class="status-title">
+            Estado Actual
+        </p>
 
-    <!-- Estilos -->
-    <link rel="stylesheet"
-          href="../css/variables.css">
+        <button class="status-button">
 
-    <link rel="stylesheet"
-          href="../css/main.css">
+            🟢 DISPONIBLE
 
-    <link rel="stylesheet"
-          href="../css/conductor.css">
+        </button>
 
-</head>
+        <p class="status-description">
+            Estás recibiendo solicitudes
+        </p>
 
-<body>
+    </section>
 
-    <div class="dashboard">
+    <!-- Estadísticas -->
+    <section class="stats-grid">
 
-        <!-- Encabezado -->
-        <header class="header">
+        <div class="stat-card large">
 
-            <h2>
-                Hola Juan 👋
-            </h2>
+            <span>Viajes Hoy</span>
 
-            <p>
-                Bienvenido a MOTI
-            </p>
+            <h3>15</h3>
 
-        </header>
+        </div>
 
-        <!-- Estado -->
-        <section class="status-card">
+        <div class="stat-card large">
 
-            <div class="status-info">
+            <span>Ganancias Hoy</span>
 
-                <span class="status-dot"></span>
+            <h3>$450</h3>
 
-                <strong>
-                    Disponible
-                </strong>
+        </div>
 
-            </div>
+    </section>
 
-            <button class="status-btn">
+    <!-- Accesos rápidos -->
+    <section class="menu-grid">
 
-                Cambiar estado
+        <div class="menu-card">
 
-            </button>
+            <span class="badge">3</span>
 
-        </section>
-
-        <!-- Solicitud -->
-        <section class="request-card">
-
-            <h3>
-                Solicitud disponible
-            </h3>
-
-            <div class="request-info">
-
-                <p>
-                    📍 Viejo Xochimilco
-                </p>
-
-                <p>
-                    🎯 Centro
-                </p>
-
-                <p>
-                    📏 1.2 km
-                </p>
-
-            </div>
-
-            <div class="request-actions">
-
-                <button class="accept-btn">
-
-                    Aceptar
-
-                </button>
-
-                <button class="reject-btn">
-
-                    Rechazar
-
-                </button>
-
-            </div>
-
-        </section>
-
-    </div>
-
-    <!-- Menú inferior -->
-    <nav class="bottom-nav">
-
-        <a href="#">
             <span class="material-symbols-outlined">
-                home
+                notifications
             </span>
-            Inicio
-        </a>
 
-        <a href="#">
+            <p>Solicitudes</p>
+
+        </div>
+
+        <div class="menu-card">
+
+            <span class="material-symbols-outlined">
+                receipt_long
+            </span>
+
+            <p>Mis Viajes</p>
+
+        </div>
+
+        <div class="menu-card">
+
             <span class="material-symbols-outlined">
                 route
             </span>
-            Rutas
-        </a>
 
-        <a href="#">
+            <p>Rutas y Tarifas</p>
+
+        </div>
+
+        <div class="menu-card">
+
             <span class="material-symbols-outlined">
                 person
             </span>
-            Perfil
-        </a>
 
-    </nav>
+            <p>Perfil</p>
 
-</body>
+        </div>
 
-</html>
+    </section>
+
+</div>
