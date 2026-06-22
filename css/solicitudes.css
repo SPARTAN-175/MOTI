@@ -1,0 +1,134 @@
+.container{
+
+    max-width:420px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+/* =====================
+   TARJETA
+===================== */
+
+.request-card{
+
+    margin-top:20px;
+
+    border-radius:20px;
+
+    padding:20px;
+}
+
+/* =====================
+   LOCAL
+===================== */
+
+.local{
+
+    background:#dcfce7;
+
+    border:2px solid #22c55e;
+}
+
+/* =====================
+   ESPECIAL
+===================== */
+
+.especial{
+
+    background:#ffedd5;
+
+    border:2px solid #f97316;
+}
+
+/* =====================
+   TIPO DE VIAJE
+===================== */
+
+.trip-type{
+
+    display:inline-block;
+
+    padding:8px 15px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+    background:white;
+}
+
+/* =====================
+   INFO
+===================== */
+
+.trip-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+/* =====================
+   BOTONES
+===================== */
+
+.actions{
+
+    margin-top:25px;
+
+    display:flex;
+
+    gap:10px;
+}
+
+.accept-btn{
+
+    flex:1;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:15px;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.local-btn{
+
+    background:#22c55e;
+}
+
+.especial-btn{
+
+    background:#f97316;
+}
+
+.reject-btn{
+
+    flex:1;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
