@@ -169,6 +169,8 @@
     text-decoration:none;
 
     color:inherit;
+
+    display:flex;
 }
 
 .menu-card:hover{
