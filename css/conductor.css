@@ -1,1 +1,169 @@
+/* ===================================
+   DASHBOARD CONDUCTOR
+   =================================== */
 
+.dashboard{
+
+    width:100%;
+    max-width:420px;
+
+    margin:0 auto;
+
+    padding:20px;
+
+    padding-bottom:90px;
+}
+
+/* ===================================
+   HEADER
+   =================================== */
+
+.header h2{
+
+    margin-bottom:5px;
+
+    color:var(--text);
+}
+
+.header p{
+
+    color:var(--text-light);
+}
+
+/* ===================================
+   ESTADO
+   =================================== */
+
+.status-card{
+
+    margin-top:20px;
+
+    background:white;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.status-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.status-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+}
+
+.status-btn{
+
+    border:none;
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+/* ===================================
+   SOLICITUD
+   =================================== */
+
+.request-card{
+
+    margin-top:20px;
+
+    background:white;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    padding:20px;
+}
+
+.request-card h3{
+
+    margin-bottom:15px;
+}
+
+.request-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    color:var(--text);
+}
+
+/* ===================================
+   BOTONES
+   =================================== */
+
+.request-actions{
+
+    margin-top:20px;
+
+    display:flex;
+
+    gap:10px;
+}
+
+.accept-btn{
+
+    flex:1;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.reject-btn{
+
+    flex:1;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#ef4444;
+
+    color:white;
+
+    cursor:pointer;
+}
