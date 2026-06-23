@@ -171,3 +171,41 @@
 
     font-size:22px;
 }
+
+
+   .map-link-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:16px;
+
+    margin-top:15px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    cursor:pointer;
+}
+
+.map-link-card .material-symbols-outlined{
+
+    font-size:32px;
+
+    color:#16a34a;
+}
+
+.map-link-card p{
+
+    font-size:13px;
+
+    color:#6b7280;
+
+    margin-top:4px;
+}
