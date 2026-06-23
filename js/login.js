@@ -82,6 +82,9 @@ async function iniciarSesion(){
 
         if(usuario.tipo === "pasajero"){
 
+            console.log(
+            "Redirigiendo a dashboard pasajero"
+            );
             window.location.href =
             "dashboard-pasajero.html";
 
