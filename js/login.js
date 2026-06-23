@@ -91,21 +91,14 @@ async function iniciarSesion(){
             return;
         }
 
-        if(usuario.tipo === "conductor"){
+       if(usuario.tipo === "conductor"){
 
-            if(usuario.estado === "pendiente"){
+    window.location.href =
+    "dashboard-conductor.html";
 
-                window.location.href =
-                "conductor-pendiente.html";
+    return;
 
-            }else{
-
-                window.location.href =
-                "dashboard-conductor.html";
-
-            }
-
-        }
+}
 
     }
     catch(error){
