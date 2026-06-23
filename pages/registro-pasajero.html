@@ -56,8 +56,9 @@
                 </label>
 
                 <input
-                    type="text"
-                    placeholder="Ingresa tu nombre">
+                 type="text"
+                 id="nombre"
+                 placeholder="Ingresa tu nombre">
 
             </div>
 
@@ -69,10 +70,38 @@
                 </label>
 
                 <input
-                    type="tel"
-                    placeholder="9611234567">
+                type="tel"
+                id="telefono"
+              placeholder="9611234567">
 
             </div>
+
+            <!-- Municipio -->
+            <div class="input-group">
+
+             <label>
+             Municipio
+             </label>
+
+    <input
+        type="text"
+        id="municipio"
+        placeholder="Ostuacán">
+
+</div>
+            <!-- Localidad -->
+            <div class="input-group">
+
+    <label>
+        Localidad
+    </label>
+
+    <input
+        type="text"
+        id="localidad"
+        placeholder="Centro">
+
+</div>
 
             <!-- Contraseña -->
             <div class="input-group">
@@ -82,8 +111,9 @@
                 </label>
 
                 <input
-                    type="password"
-                    placeholder="********">
+                type="password"
+                id="password"
+                placeholder="********">
 
             </div>
 
@@ -95,8 +125,9 @@
                 </label>
 
                 <input
-                    type="password"
-                    placeholder="********">
+                type="password"
+                id="confirmPassword"
+                placeholder="********">
 
             </div>
 
@@ -114,15 +145,25 @@
             </div>
 
             <!-- Botón -->
-            <a href="dashboard-pasajero.html"
-               class="btn-primary">
-                Crear cuenta
-            </a>
+            <button
+             type="button"
+             id="btnRegistro"
+             class="btn-primary">
+
+              Crear cuenta
+
+            </button>
 
         </form>
 
     </div>
 
+
+
+
+    <script type="module"
+        src="../js/registro-pasajero.js">
+    </script>
 </body>
 
 </html>
