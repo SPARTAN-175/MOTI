@@ -35,6 +35,7 @@
     <div class="dashboard">
 
         <!-- Encabezado -->
+
         <header class="header">
 
             <h2>
@@ -48,20 +49,27 @@
         </header>
 
         <!-- Ubicación -->
+
         <section class="location-card">
 
             <span class="material-symbols-outlined">
+
                 location_on
+
             </span>
 
             <div>
 
                 <strong>
+
                     Mi ubicación
+
                 </strong>
 
                 <p>
+
                     Detectando ubicación...
+
                 </p>
 
             </div>
@@ -69,66 +77,173 @@
         </section>
 
         <!-- Mapa -->
+
         <section class="map-container">
 
             <span class="material-symbols-outlined map-icon">
+
                 map
+
             </span>
 
             <p>
+
                 Aquí aparecerá el mapa
+
             </p>
 
         </section>
 
-        <!-- Destino -->
+        <!-- Tipo de viaje -->
+
+        <section class="trip-selector">
+
+            <button class="trip-option active"
+                    id="btnLocal">
+
+                LOCAL
+
+            </button>
+
+            <button class="trip-option"
+                    id="btnEspecial">
+
+                ESPECIAL
+
+            </button>
+
+        </section>
+
+        <!-- Destino Especial -->
+
+        <section id="specialFields"
+                 class="destination"
+                 style="display:none;">
+
+            <label>
+
+                Destino
+
+            </label>
+
+            <select>
+
+                <option>
+
+                    Seleccionar destino
+
+                </option>
+
+                <option>
+
+                    Plan de Ayala
+
+                </option>
+
+                <option>
+
+                    Nuevo Xochimilco
+
+                </option>
+
+                <option>
+
+                    Tapalapa
+
+                </option>
+
+            </select>
+
+        </section>
+
+        <!-- Observaciones -->
+
         <section class="destination">
 
             <label>
-                Destino
+
+                Observaciones
+
             </label>
 
-            <input
-                type="text"
-                placeholder="Escribe o busca un destino">
+            <textarea
+                placeholder="Ejemplo: Estoy frente a urgencias">
+            </textarea>
+
+        </section>
+
+        <!-- Tarifa -->
+
+        <section class="fare-card">
+
+            <span>
+
+                Tarifa estimada
+
+            </span>
+
+            <strong id="fareAmount">
+
+                $10
+
+            </strong>
 
         </section>
 
         <!-- Botón -->
+
         <a href="#"
            class="btn-primary">
 
-            Solicitar viaje
+            Solicitar Mototaxi
 
         </a>
 
     </div>
 
     <!-- Menú inferior -->
+
     <nav class="bottom-nav">
 
         <a href="#">
+
             <span class="material-symbols-outlined">
+
                 home
+
             </span>
+
             Inicio
+
         </a>
 
         <a href="#">
+
             <span class="material-symbols-outlined">
-                event
+
+                receipt_long
+
             </span>
-            Programar
+
+            Mis Viajes
+
         </a>
 
-        <a href="#">
+        <a href="perfil-pasajero.html">
+
             <span class="material-symbols-outlined">
+
                 person
+
             </span>
+
             Perfil
+
         </a>
 
     </nav>
+
+    <script src="../js/pasajero.js"></script>
 
 </body>
 
