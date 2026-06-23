@@ -36,6 +36,12 @@ btnEspecial.addEventListener("click", () => {
 
 });
 
+
+// Coordenadas del usuario
+
+let userLat = null;
+let userLng = null;
+
 // =====================
 // GPS
 // =====================
@@ -49,14 +55,14 @@ if ("geolocation" in navigator) {
 
         (position) => {
 
-            const lat =
+            userLat =
             position.coords.latitude;
 
-            const lng =
+            userLng =
             position.coords.longitude;
 
             locationText.textContent =
-            `Lat: ${lat.toFixed(5)} | Lng: ${lng.toFixed(5)}`;
+            `GPS conectado correctamente`;
 
         },
 
