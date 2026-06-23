@@ -55,9 +55,10 @@
                     Nombre completo
                 </label>
 
-                <input
-                    type="text"
-                    placeholder="Ingresa tu nombre">
+               <input
+    type="text"
+    id="nombre"
+    placeholder="Ingresa tu nombre">
 
             </div>
 
@@ -69,10 +70,37 @@
                 </label>
 
                 <input
-                    type="tel"
-                    placeholder="9611234567">
+    type="tel"
+    id="telefono"
+    placeholder="9611234567">
 
             </div>
+
+            <div class="input-group">
+
+    <label>
+        Municipio
+    </label>
+
+    <input
+        type="text"
+        id="municipio"
+        placeholder="Ostuacán">
+
+</div>
+
+            <div class="input-group">
+
+    <label>
+        Localidad
+    </label>
+
+    <input
+        type="text"
+        id="localidad"
+        placeholder="Centro">
+
+</div>
 
            <!-- Placa de unidad -->
             <div class="input-group">
@@ -82,8 +110,9 @@
                 </label>
 
                 <input
-                    type="text"
-                    placeholder="Ingresa la placa de tu unidad">
+    type="text"
+    id="placa"
+    placeholder="Ingresa la placa de tu unidad">
 
             </div>
 
@@ -95,8 +124,9 @@
                 </label>
 
                 <input
-                    type="password"
-                    placeholder="********">
+    type="password"
+    id="password"
+    placeholder="********">
 
             </div>
 
@@ -108,8 +138,9 @@
                 </label>
 
                 <input
-                    type="password"
-                    placeholder="********">
+    type="password"
+    id="confirmPassword"
+    placeholder="********">
 
             </div>
 
@@ -150,15 +181,25 @@
 </div>
 
             <!-- Botón -->
-            <a href="conductor-pendiente.html"
-            class="btn-primary">
-            Solicitar registro
-            </a>
+           <button
+    type="button"
+    id="btnRegistroConductor"
+    class="btn-primary">
+
+    Solicitar registro
+
+</button>
 
         </form>
 
     </div>
 
+
+
+
+    <script type="module"
+        src="../js/registro-conductor.js">
+</script>
 </body>
 
 </html>
