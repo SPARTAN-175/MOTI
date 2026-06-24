@@ -104,6 +104,8 @@ async function registrarConductor(){
 
                 estado: "pendiente",
 
+                estadoServicio: "disponible",
+
                 verificado: false,
 
                 beta: true,
