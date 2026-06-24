@@ -263,24 +263,24 @@
 
 .status-green{
 
-    background: #22c55e !important;
+    background: rgba(16, 185, 129, 0.15) !important;
 
-    color: white !important;
+    color: #059669 !important;
 
 }
 
 .status-gray{
 
-    background: #9ca3af !important;
+    background: rgba(107, 114, 128, 0.15) !important;
 
-    color: white !important;
+    color: #4b5563 !important;
 
 }
 
 .status-yellow{
 
-    background: #f59e0b !important;
+    background: rgba(245, 158, 11, 0.15) !important;
 
-    color: white !important;
+    color: #d97706 !important;
 
 }
