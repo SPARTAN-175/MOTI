@@ -130,11 +130,24 @@ async function registrarConductor(){
     }
     catch(error){
 
-        console.error(error);
+    console.error(error);
+
+    if(
+        error.code ===
+        "auth/email-already-in-use"
+    ){
 
         alert(
-            error.message
+            "Ya existe una cuenta registrada con este número telefónico."
         );
+
+        return;
+
+    }
+
+    alert(
+        "No se pudo crear la cuenta."
+    );
 
     }
 
