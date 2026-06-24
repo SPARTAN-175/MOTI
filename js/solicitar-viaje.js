@@ -4,11 +4,11 @@ from "./firebase-config.js";
 import {
     addDoc,
     collection,
-    serverTimestamp
+    serverTimestamp,
+    doc,
+    getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
 const btnSolicitar =
 document.getElementById(
     "btnSolicitar"
@@ -40,6 +40,18 @@ btnSolicitar.addEventListener(
 
             const user =
             auth.currentUser;
+
+            const userDoc =
+await getDoc(
+    doc(
+        db,
+        "usuarios",
+        user.uid
+    )
+);
+
+const userData =
+userDoc.data();
 
             if(!user){
 
@@ -83,11 +95,16 @@ btnSolicitar.addEventListener(
                     "Local",
 
                     observaciones:
-                    observaciones.value,
+observaciones.value.trim(),
 
-                    estado:
-                    "pendiente",
+latitud:
+userData.latitud,
 
+longitud:
+userData.longitud,
+
+estado:
+"pendiente",
                     fecha:
                     serverTimestamp()
 
