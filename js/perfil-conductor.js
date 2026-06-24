@@ -66,6 +66,49 @@ onAuthStateChanged(
             ).textContent =
             datos.placa || "-";
 
+            const estado =
+datos.estadoServicio ||
+"disponible";
+
+const serviceStatus =
+document.getElementById(
+    "serviceStatus"
+);
+
+if(serviceStatus){
+
+    if(
+        estado ===
+        "disponible"
+    ){
+
+        serviceStatus.textContent =
+        "Disponible";
+
+    }
+
+    if(
+        estado ===
+        "no_disponible"
+    ){
+
+        serviceStatus.textContent =
+        "No disponible";
+
+    }
+
+    if(
+        estado ===
+        "en_viaje"
+    ){
+
+        serviceStatus.textContent =
+        "En viaje";
+
+    }
+
+}
+
         }
         catch(error){
 
