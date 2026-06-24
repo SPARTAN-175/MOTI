@@ -104,7 +104,7 @@ function actualizarVista(){
     ){
 
         statusButton.textContent =
-        "🟢 Disponible";
+        "Disponible";
 
         statusDescription.textContent =
         "Estás recibiendo solicitudes";
@@ -121,7 +121,7 @@ function actualizarVista(){
     ){
 
         statusButton.textContent =
-        "⚪ No disponible";
+        "No disponible";
 
         statusDescription.textContent =
         "No estás recibiendo solicitudes";
@@ -138,7 +138,7 @@ function actualizarVista(){
     ){
 
         statusButton.textContent =
-        "🟡 En viaje";
+        "En viaje";
 
         statusDescription.textContent =
         "Tienes un viaje activo";
