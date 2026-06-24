@@ -1,32 +1,114 @@
-alert("solicitar-viaje.js cargado");
+import { auth, db }
+from "./firebase-config.js";
 
-const btnLocal = document.getElementById("btnLocal");
-const btnEspecial = document.getElementById("btnEspecial");
+import {
+    addDoc,
+    collection,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const specialFields =
-document.getElementById("specialFields");
 
-const fareAmount =
-document.getElementById("fareAmount");
+const btnSolicitar =
+document.getElementById(
+    "btnSolicitar"
+);
 
-btnLocal.addEventListener("click", () => {
+const observaciones =
+document.getElementById(
+    "observaciones"
+);
 
-    btnLocal.classList.add("active");
-    btnEspecial.classList.remove("active");
+const destinoEspecial =
+document.getElementById(
+    "destinoEspecial"
+);
 
-    specialFields.style.display = "none";
+const btnEspecial =
+document.getElementById(
+    "btnEspecial"
+);
 
-    fareAmount.textContent = "$10";
 
-});
+btnSolicitar.addEventListener(
+    "click",
+    async (e) => {
 
-btnEspecial.addEventListener("click", () => {
+        e.preventDefault();
 
-    btnEspecial.classList.add("active");
-    btnLocal.classList.remove("active");
+        try{
 
-    specialFields.style.display = "block";
+            const user =
+            auth.currentUser;
 
-    fareAmount.textContent = "$30";
+            if(!user){
 
-});
+                alert(
+                    "Debes iniciar sesión."
+                );
+
+                return;
+
+            }
+
+            const tipoViaje =
+            btnEspecial.classList.contains(
+                "active"
+            )
+            ?
+            "especial"
+            :
+            "local";
+
+            await addDoc(
+
+                collection(
+                    db,
+                    "solicitudes"
+                ),
+
+                {
+
+                    pasajeroId:
+                    user.uid,
+
+                    tipoViaje,
+
+                    destino:
+                    tipoViaje ===
+                    "especial"
+                    ?
+                    destinoEspecial.value
+                    :
+                    "Local",
+
+                    observaciones:
+                    observaciones.value,
+
+                    estado:
+                    "pendiente",
+
+                    fecha:
+                    serverTimestamp()
+
+                }
+
+            );
+
+            alert(
+                "Solicitud enviada correctamente."
+            );
+
+        }
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                "Error al crear solicitud."
+            );
+
+        }
+
+    }
+);
