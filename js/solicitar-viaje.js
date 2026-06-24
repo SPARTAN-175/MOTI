@@ -1,3 +1,5 @@
+alert("solicitar-viaje.js cargado");
+
 const btnLocal = document.getElementById("btnLocal");
 const btnEspecial = document.getElementById("btnEspecial");
 
