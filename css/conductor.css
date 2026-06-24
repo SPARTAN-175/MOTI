@@ -256,3 +256,31 @@
 
     cursor:pointer;
 }
+
+/* =====================
+   ESTADO CONDUCTOR
+===================== */
+
+.status-green{
+
+    background: #22c55e !important;
+
+    color: white !important;
+
+}
+
+.status-gray{
+
+    background: #9ca3af !important;
+
+    color: white !important;
+
+}
+
+.status-yellow{
+
+    background: #f59e0b !important;
+
+    color: white !important;
+
+}
