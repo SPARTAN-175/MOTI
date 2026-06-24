@@ -1,3 +1,15 @@
+import { auth, db } from "./firebase-config.js";
+
+import {
+
+    doc,
+
+    updateDoc
+
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+
 // =====================
 // SELECTOR DE VIAJE
 // =====================
@@ -64,6 +76,18 @@ if ("geolocation" in navigator) {
             locationText.textContent =
             `GPS conectado correctamente`;
 
+            const user = auth.currentUser;
+
+if(user){
+
+    actualizarUbicacion(
+        user.uid,
+        userLat,
+        userLng
+    );
+
+}
+
         },
 
         (error) => {
@@ -81,5 +105,47 @@ if ("geolocation" in navigator) {
 
     locationText.textContent =
     "GPS no compatible";
+
+}
+
+async function actualizarUbicacion(
+    uid,
+    lat,
+    lng
+){
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "usuarios",
+                uid
+            ),
+
+            {
+
+                latitud: lat,
+
+                longitud: lng,
+
+                ultimaUbicacion:
+                new Date().toISOString()
+
+            }
+
+        );
+
+        console.log(
+            "📍 Ubicación actualizada"
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
 
 }
