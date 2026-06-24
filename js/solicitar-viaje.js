@@ -84,6 +84,9 @@ userDoc.data();
                     pasajeroId:
                     user.uid,
 
+                    nombrePasajero:
+                    userData.nombre,
+
                     tipoViaje,
 
                     destino:
