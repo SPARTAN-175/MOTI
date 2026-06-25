@@ -9,7 +9,13 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import {
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+    collection,
+    query,
+    where,
+    orderBy,
+    limit,
+    onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -26,6 +32,18 @@ document.getElementById(
 
 let currentState = null;
 
+const requestPopup =
+document.getElementById(
+    "requestPopup"
+);
+
+const requestContent =
+document.getElementById(
+    "requestContent"
+);
+
+let ultimaSolicitud =
+null;
 
 onAuthStateChanged(
     auth,
@@ -53,6 +71,7 @@ onAuthStateChanged(
         "disponible";
 
         actualizarVista();
+        escucharSolicitudes();
 
         statusButton.addEventListener(
             "click",
@@ -150,3 +169,151 @@ function actualizarVista(){
     }
 
 }
+
+
+// ======================
+// SOLICITUDES EN TIEMPO REAL
+// ======================
+
+function escucharSolicitudes(){
+
+    const q =
+    query(
+
+        collection(
+            db,
+            "solicitudes"
+        ),
+
+        where(
+            "estado",
+            "==",
+            "pendiente"
+        ),
+
+        orderBy(
+            "fecha",
+            "desc"
+        ),
+
+        limit(1)
+
+    );
+
+    onSnapshot(
+
+        q,
+
+        (snapshot)=>{
+
+            if(snapshot.empty){
+
+                requestPopup.style.display =
+                "none";
+
+                ultimaSolicitud =
+                null;
+
+                return;
+
+            }
+
+            const solicitud =
+            snapshot.docs[0];
+
+            if(
+                ultimaSolicitud ===
+                solicitud.id
+            ){
+                return;
+            }
+
+            ultimaSolicitud =
+            solicitud.id;
+
+            mostrarPopup(
+                solicitud.id,
+                solicitud.data()
+            );
+
+        }
+
+    );
+
+}
+
+function mostrarPopup(
+    id,
+    datos
+){
+
+    const clase =
+    datos.tipoViaje ===
+    "especial"
+    ?
+    "popup-special"
+    :
+    "popup-local";
+
+    requestContent.innerHTML = `
+
+        <div class="${clase}">
+
+            <h3>
+
+                Solicitud de viaje
+
+            </h3>
+
+            <p>
+
+                <strong>
+
+                    ${datos.nombrePasajero}
+
+                </strong>
+
+            </p>
+
+            <p>
+
+                Destino:
+                ${datos.destino}
+
+            </p>
+
+            <p>
+
+                Referencia:
+                ${datos.observaciones || "-"}
+
+            </p>
+
+            <div class="popup-actions">
+
+                <button
+                    class="accept-trip">
+
+                    Aceptar
+
+                </button>
+
+                <button
+                    class="reject-trip">
+
+                    Rechazar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    requestPopup.style.display =
+    "block";
+
+}
+
+
