@@ -390,13 +390,43 @@ document.querySelector(".accept-trip"));
 
 async function aceptarSolicitud(id){
 
-    console.log(
-        "Solicitud:",
-        id
-    );
+    try{
 
-    alert(
-        "Aceptando: " + id
-    );
+        await updateDoc(
+
+            doc(
+                db,
+                "solicitudes",
+                id
+            ),
+
+            {
+
+                estado:"aceptada",
+
+                conductorId:
+                auth.currentUser.uid,
+
+                fechaAceptacion:
+                serverTimestamp()
+
+            }
+
+        );
+
+        alert(
+            "Solicitud aceptada."
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Error al aceptar."
+        );
+
+    }
 
 }
