@@ -407,7 +407,25 @@
 
 }
 
+.trip-badge{
 
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+    background:#E8F5E9;
+
+    color:#2E7D32;
+
+}
 
 
 
