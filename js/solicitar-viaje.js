@@ -24,6 +24,11 @@ document.getElementById(
     "destinoEspecial"
 );
 
+const destino =
+document.getElementById(
+    "destino"
+);
+
 const btnEspecial =
 document.getElementById(
     "btnEspecial"
@@ -90,12 +95,12 @@ userDoc.data();
                     tipoViaje,
 
                     destino:
-                    tipoViaje ===
-                    "especial"
-                    ?
-                    destinoEspecial.value
-                    :
-                    "Local",
+tipoViaje ===
+"especial"
+?
+destinoEspecial.value
+:
+destino.value.trim(),
 
                     observaciones:
 observaciones.value.trim(),
