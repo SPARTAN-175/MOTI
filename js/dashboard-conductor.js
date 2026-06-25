@@ -255,6 +255,31 @@ function mostrarPopup(
     :
     "popup-local";
 
+    const tipoViaje =
+    datos.tipoViaje ===
+    "especial"
+    ?
+    "ESPECIAL"
+    :
+    "LOCAL";
+
+    let hora = "";
+
+if(datos.fecha){
+
+    hora =
+    datos.fecha
+    .toDate()
+    .toLocaleTimeString(
+        "es-MX",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
     requestContent.innerHTML = `
 
         <div class="${clase}">
