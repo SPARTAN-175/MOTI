@@ -282,60 +282,73 @@ if(datos.fecha){
 
     requestContent.innerHTML = `
 
-        <div class="${clase}">
+<div class="${clase}">
 
-            <h3>
+    <h3>
 
-                Solicitud de viaje
+        Nueva solicitud
 
-            </h3>
+    </h3>
 
-            <p>
+    <div class="trip-badge">
 
-                <strong>
+        ${tipoViaje}
 
-                    ${datos.nombrePasajero}
+    </div>
 
-                </strong>
+    <p>
 
-            </p>
+        <strong>
 
-            <p>
+            ${datos.nombrePasajero}
 
-                Destino:
-                ${datos.destino}
+        </strong>
 
-            </p>
+    </p>
 
-            <p>
+    <p class="popup-time">
 
-                Referencia:
-                ${datos.observaciones || "-"}
+        ${hora}
 
-            </p>
+    </p>
 
-            <div class="popup-actions">
+    <p>
 
-                <button
-                    class="accept-trip">
+        <strong>Destino</strong><br>
 
-                    Aceptar
+        ${datos.destino}
 
-                </button>
+    </p>
 
-                <button
-                    class="reject-trip">
+    <p>
 
-                    Rechazar
+        <strong>Referencia</strong><br>
 
-                </button>
+        ${datos.observaciones || "-"}
 
-            </div>
+    </p>
 
-        </div>
+    <div class="popup-actions">
 
-    `;
+        <button
+            class="accept-trip">
 
+            Aceptar
+
+        </button>
+
+        <button
+            class="reject-trip">
+
+            Rechazar
+
+        </button>
+
+    </div>
+
+</div>
+
+`;
     requestPopup.style.display =
     "block";
 
