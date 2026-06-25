@@ -77,6 +77,11 @@ userDoc.data();
             :
             "local";
 
+            alert(
+    "Destino capturado: " +
+    destino.value
+);
+
             await addDoc(
 
                 collection(
