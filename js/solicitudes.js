@@ -122,21 +122,24 @@ query(
 
                 <div class="actions">
 
-                    <button
-                        class="accept-btn">
+    <button
+        class="location-btn"
+        onclick="window.open(
+        'https://www.google.com/maps?q=${datos.latitud},${datos.longitud}'
+        )">
 
-                        Aceptar
+        Ver ubicación
 
-                    </button>
+    </button>
 
-                    <button
-                        class="reject-btn">
+    <button
+        class="accept-btn">
 
-                        Rechazar
+        Aceptar
 
-                    </button>
+    </button>
 
-                </div>
+</div>
 
             </div>
 
