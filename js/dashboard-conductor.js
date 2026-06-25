@@ -15,7 +15,8 @@ import {
     where,
     orderBy,
     limit,
-    onSnapshot
+    onSnapshot,
+    serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -352,6 +353,22 @@ if(datos.fecha){
     requestPopup.style.display =
     "block";
 
+    const btnAceptar =
+document.querySelector(
+    ".accept-trip"
+);
+
+btnAceptar.addEventListener(
+    "click",
+    aceptarSolicitud
+);
+
 }
 
+async function aceptarSolicitud(){
 
+    alert(
+        "Aceptando solicitud..."
+    );
+
+}
