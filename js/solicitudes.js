@@ -5,7 +5,8 @@ import {
     collection,
     query,
     where,
-    getDocs
+    getDocs,
+    orderBy
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -20,17 +21,24 @@ async function cargarSolicitudes(){
     try{
 
         const q =
-        query(
-            collection(
-                db,
-                "solicitudes"
-            ),
-            where(
-                "estado",
-                "==",
-                "pendiente"
-            )
-        );
+query(
+    collection(
+        db,
+        "solicitudes"
+    ),
+
+    where(
+        "estado",
+        "==",
+        "pendiente"
+    ),
+
+    orderBy(
+        "fecha",
+        "desc"
+    )
+
+);
 
         const snapshot =
         await getDocs(q);
