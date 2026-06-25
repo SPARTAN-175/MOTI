@@ -46,6 +46,37 @@ document.getElementById(
 let ultimaSolicitud =
 null;
 
+requestContent.addEventListener(
+    "click",
+    (e)=>{
+
+        if(
+            e.target.classList.contains(
+                "accept-trip"
+            )
+        ){
+
+            aceptarSolicitud(
+                ultimaSolicitud
+            );
+
+        }
+
+        if(
+            e.target.classList.contains(
+                "reject-trip"
+            )
+        ){
+
+            console.log(
+                "Solicitud rechazada"
+            );
+
+        }
+
+    }
+);
+
 onAuthStateChanged(
     auth,
     async (user) => {
@@ -353,22 +384,19 @@ if(datos.fecha){
     requestPopup.style.display =
     "block";
 
-    const btnAceptar =
-document.querySelector(
-    ".accept-trip"
-);
-
-btnAceptar.addEventListener(
-    "click",
-    aceptarSolicitud
-);
-
+    console.log("Botón encontrado:",
+document.querySelector(".accept-trip"));
 }
 
-async function aceptarSolicitud(){
+async function aceptarSolicitud(id){
+
+    console.log(
+        "Solicitud:",
+        id
+    );
 
     alert(
-        "Aceptando solicitud..."
+        "Aceptando: " + id
     );
 
 }
