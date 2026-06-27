@@ -582,6 +582,20 @@ function escucharMovimientoConductor(){
                 nuevaPos
             );
 
+            map.panTo(
+
+    nuevaPos,
+
+    {
+
+        animate:true,
+
+        duration:0.8
+
+    }
+
+);
+
             if(rutaLinea){
 
                 rutaLinea.setLatLngs([
