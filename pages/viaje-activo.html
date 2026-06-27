@@ -1,140 +1,114 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>MOTI | Viaje Activo</title>
+<title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+Viaje Activo
 
-    <link rel="stylesheet"
-          href="../css/variables.css">
+</title>
 
-    <link rel="stylesheet"
-          href="../css/main.css">
+<link rel="stylesheet"
+href="../css/variables.css">
 
-    <link rel="stylesheet"
-          href="../css/viaje-activo.css">
+<link rel="stylesheet"
+href="../css/main.css">
+
+<link rel="stylesheet"
+href="../css/viaje-activo.css">
 
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-    <h2>Detalles del Viaje</h2>
+<h2>
 
-    <div class="trip-card local">
+Viaje Activo
 
-        <div class="trip-badge">
+</h2>
 
-            LOCAL
+<div class="status-card">
 
-        </div>
+<p id="estadoViaje">
 
-        <div class="trip-section">
+En camino al pasajero
 
-            <span class="label">
-                Pasajero
-            </span>
-
-            <strong>
-                Carlos Hernández
-            </strong>
-
-        </div>
-
-        <div class="trip-section">
-
-            <span class="label">
-                Teléfono
-            </span>
-
-            <strong>
-                9611234567
-            </strong>
-
-        </div>
-
-        <div class="trip-section">
-
-            <span class="label">
-                Origen
-            </span>
-
-            <strong>
-                Hospital Básico Comunitario
-            </strong>
-
-        </div>
-
-        <div class="trip-section">
-
-            <span class="label">
-                Destino
-            </span>
-
-            <strong>
-                Mercado Municipal
-            </strong>
-
-        </div>
-
-        <div class="trip-section">
-
-            <span class="label">
-                Observaciones
-            </span>
-
-            <strong>
-                Estoy frente a urgencias
-            </strong>
-
-        </div>
-
-        <div class="trip-section">
-
-            <span class="label">
-                Tarifa
-            </span>
-
-            <strong class="fare">
-                $10
-            </strong>
-
-        </div>
-
-        <div class="actions">
-
-            <a href="tel:9611234567"
-               class="call-btn">
-
-                Llamar
-
-            </a>
-
-            <button class="finish-btn">
-
-                Finalizar Viaje
-
-            </button>
-
-        </div>
-
-    </div>
+</p>
 
 </div>
-    
+
+<div class="card">
+
+<h3 id="nombrePasajero">
+
+Cargando...
+
+</h3>
+
+<p>
+
+<strong>
+
+Destino
+
+</strong>
+
+</p>
+
+<p id="destinoViaje">
+
+...
+
+</p>
+
+<p>
+
+<strong>
+
+Referencia
+
+</strong>
+
+</p>
+
+<p id="referenciaViaje">
+
+...
+
+</p>
+
+</div>
+
+<div class="map-card">
+
+Mapa próximamente
+
+</div>
+
+<button
+id="btnAccion"
+class="btn-primary">
+
+Iniciar recorrido
+
+</button>
+
+</div>
+
 <script type="module"
-        src="../js/auth-guard.js">
+src="../js/viaje-activo.js">
+
 </script>
-    
+
 </body>
 
 </html>
