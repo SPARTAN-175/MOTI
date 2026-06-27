@@ -23,6 +23,45 @@ let pasajeroMarker = null;
 let rutaLinea = null;
 
 
+const motoIcon = L.icon({
+
+    iconUrl:
+    "../assets/icons/mototaxi.svg",
+
+    iconSize:[42,42],
+
+    iconAnchor:[21,21],
+
+    popupAnchor:[0,-18]
+
+});
+
+
+const pasajeroIcon = L.icon({
+
+    iconUrl:
+    "../assets/icons/pasajero.svg",
+
+    iconSize:[40,40],
+
+    iconAnchor:[20,20],
+
+    popupAnchor:[0,-18]
+
+});
+
+
+const destinoIcon = L.icon({
+
+    iconUrl:
+    "../assets/icons/destino.svg",
+
+    iconSize:[38,38],
+
+    iconAnchor:[19,19]
+
+});
+
 // =========================
 // CARGAR VIAJE ACTIVO
 // =========================
@@ -398,26 +437,40 @@ console.log(
     }
 
     conductorMarker =
-    L.marker(
-        conductorPos
-    )
+L.marker(
 
-    .addTo(map)
+    conductorPos,
 
-    .bindPopup(
-        "Tú"
-    );
+    {
 
-    pasajeroMarker =
-    L.marker(
-        pasajeroPos
-    )
+        icon:
+        motoIcon
 
-    .addTo(map)
+    }
 
-    .bindPopup(
-        viajeActual.nombrePasajero
-    );
+)
+.addTo(map)
+.bindPopup("Tú");
+
+   pasajeroMarker =
+L.marker(
+
+    pasajeroPos,
+
+    {
+
+        icon:
+        pasajeroIcon
+
+    }
+
+)
+.addTo(map)
+.bindPopup(
+
+    viajeActual.nombrePasajero
+
+);
 
 
 
