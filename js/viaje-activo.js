@@ -4,7 +4,8 @@ from "./firebase-config.js";
 import {
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+    onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -110,6 +111,7 @@ async function cargarViaje(id){
 
     actualizarInterfaz();
     await cargarMapa();
+    escucharMovimientoConductor();
 
 }
 
@@ -489,3 +491,69 @@ L.featureGroup([
     );
 
 }
+
+
+function escucharMovimientoConductor(){
+
+    onSnapshot(
+
+        doc(
+
+            db,
+
+            "usuarios",
+
+            auth.currentUser.uid
+
+        ),
+
+        (docSnap)=>{
+
+            const datos =
+            docSnap.data();
+
+            if(
+                !datos ||
+                !conductorMarker
+            ) return;
+
+            const nuevaPos = [
+
+                datos.latitud,
+
+                datos.longitud
+
+            ];
+
+            conductorMarker.setLatLng(
+                nuevaPos
+            );
+
+            if(rutaLinea){
+
+                rutaLinea.setLatLngs([
+
+                    nuevaPos,
+
+                    [
+
+                        viajeActual.latitud,
+
+                        viajeActual.longitud
+
+                    ]
+
+                ]);
+
+            }
+
+        }
+
+    );
+
+}
+
+
+
+
+
