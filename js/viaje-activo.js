@@ -105,35 +105,58 @@ async function cargarViaje(id){
 
 document
 .getElementById(
-    "btnNavegar"
+    "btnAccion"
 )
 .addEventListener(
 
-    "click",
+    btnAccion.addEventListener(
 
-    ()=>{
+"click",
 
-        if(!viajeActual)
-        return;
+ejecutarAccion
 
-        const url =
-`https://www.google.com/maps/dir/?api=1&destination=${viajeActual.latitud},${viajeActual.longitud}`;
+);
+async function ejecutarAccion(){
 
-        window.open(
-            url,
-            "_blank"
-        );
+    switch(viajeActual.estado){
+
+        case "aceptada":
+
+            await cambiarEstado(
+                "en_camino"
+            );
+
+            break;
+
+        case "en_camino":
+
+            await cambiarEstado(
+                "esperando_pasajero"
+            );
+
+            break;
+
+        case "esperando_pasajero":
+
+            await cambiarEstado(
+                "en_viaje"
+            );
+
+            break;
+
+        case "en_viaje":
+
+            await cambiarEstado(
+                "finalizada"
+            );
+
+            break;
 
     }
 
-);
+}
 
-cambiarEstado();
-
-async function cambiarEstado(){
-
-    if(!viajeId)
-    return;
+async function cambiarEstado(nuevoEstado){
 
     await updateDoc(
 
@@ -146,21 +169,15 @@ async function cambiarEstado(){
         {
 
             estado:
-            "en_camino"
+            nuevoEstado
 
         }
 
     );
 
-    document.getElementById(
-        "estadoViaje"
-    ).textContent =
-    "En camino al pasajero";
-
-    document.getElementById(
-        "btnNavegar"
-    ).textContent =
-    "Llegué al pasajero";
+    await cargarViaje(
+        viajeId
+    );
 
 }
 
