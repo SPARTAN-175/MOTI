@@ -68,6 +68,16 @@ document.getElementById(
     "continueTrip"
 );
 
+continueTrip.addEventListener(
+    "click",
+    ()=>{
+
+        window.location.href =
+        "viaje-activo.html";
+
+    }
+);
+
 let ultimaSolicitud =
 null;
 
