@@ -392,6 +392,11 @@ async function aceptarSolicitud(id){
 
     try{
 
+        const uid =
+        auth.currentUser.uid;
+
+        // Actualizar solicitud
+
         await updateDoc(
 
             doc(
@@ -402,10 +407,11 @@ async function aceptarSolicitud(id){
 
             {
 
-                estado:"aceptada",
+                estado:
+                "aceptada",
 
                 conductorId:
-                auth.currentUser.uid,
+                uid,
 
                 fechaAceptacion:
                 serverTimestamp()
@@ -414,17 +420,39 @@ async function aceptarSolicitud(id){
 
         );
 
-        alert(
-            "Solicitud aceptada."
+        // Actualizar conductor
+
+        await updateDoc(
+
+            doc(
+                db,
+                "usuarios",
+                uid
+            ),
+
+            {
+
+                estadoServicio:
+                "en_viaje",
+
+                viajeActivo:
+                id
+
+            }
+
         );
 
+        window.location.href =
+        "viaje-activo.html";
+
     }
+
     catch(error){
 
         console.error(error);
 
         alert(
-            "Error al aceptar."
+            "No se pudo aceptar el viaje."
         );
 
     }
