@@ -21,6 +21,10 @@ href="../css/variables.css">
 <link rel="stylesheet"
 href="../css/main.css">
 
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
 <link rel="stylesheet"
 href="../css/viaje-activo.css">
 
@@ -88,23 +92,13 @@ Referencia
 
 </div>
 
-<div class="map-card">
+   <div class="map-card">
 
-    <p>
+    <div id="map">
 
-        Ubicación del pasajero
+    </div>
 
-    </p>
-
-    <button
-        id="btnNavegar"
-        class="btn-primary">
-
-        Abrir navegación
-
-    </button>
-
-</div>
+</div> 
 
 <button
 id="btnAccion"
@@ -116,6 +110,11 @@ Iniciar recorrido
 
 </div>
 
+
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+    
 <script type="module"
 src="../js/viaje-activo.js">
 
