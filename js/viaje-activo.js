@@ -19,6 +19,7 @@ let viajeId = null;
 let map = null;
 let conductorMarker = null;
 let pasajeroMarker = null;
+let rutaLinea = null;
 
 
 // =========================
@@ -416,14 +417,64 @@ console.log(
         viajeActual.nombrePasajero
     );
 
+
+
+    if(rutaLinea){
+
+    map.removeLayer(
+        rutaLinea
+    );
+
+}
+
+const colorRuta =
+
+    viajeActual.tipoViaje === "especial"
+
+    ?
+
+    "#f97316"
+
+    :
+
+    "#16a34a";
+
+
+rutaLinea =
+
+L.polyline(
+
+    [
+
+        conductorPos,
+
+        pasajeroPos
+
+    ],
+
+    {
+
+        color: colorRuta,
+
+        weight:5,
+
+        opacity:0.9
+
+    }
+
+).addTo(map);
+
+    
     const grupo =
-    L.featureGroup([
+L.featureGroup([
 
-        conductorMarker,
+    conductorMarker,
 
-        pasajeroMarker
+    pasajeroMarker,
 
-    ]);
+    rutaLinea
+
+]);
 
     map.fitBounds(
 
