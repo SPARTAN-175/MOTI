@@ -293,6 +293,29 @@ async function cambiarEstado(nuevoEstado){
 // =========================
 async function cargarMapa(){
 
+
+console.log(
+
+    "Conductor:",
+
+    conductor.latitud,
+
+    conductor.longitud
+
+);
+
+console.log(
+
+    "Pasajero:",
+
+    viajeActual.latitud,
+
+    viajeActual.longitud
+
+);
+
+
+    
     const usuarioDoc =
     await getDoc(
 
