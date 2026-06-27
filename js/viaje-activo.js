@@ -483,36 +483,31 @@ L.marker(
 
 }
 
-const colorRuta =
-
-    viajeActual.tipoViaje === "especial"
-
-    ?
-
-    "#f97316"
-
-    :
-
-    "#16a34a";
-
-
 dibujarRuta(
     conductorPos,
     pasajeroPos
 );
-    
 
-    map.fitBounds(
+const grupo =
+L.featureGroup([
 
-        grupo.getBounds(),
+    conductorMarker,
 
-        {
+    pasajeroMarker
 
-            padding:[40,40]
+]);
 
-        }
+map.fitBounds(
 
-    );
+    grupo.getBounds(),
+
+    {
+
+        padding:[40,40]
+
+    }
+
+);
 
 }
 
@@ -567,23 +562,19 @@ function escucharMovimientoConductor(){
                 
 );
 
-            if(rutaLinea){
+            dibujarRuta(
 
-                rutaLinea.setLatLngs([
+    nuevaPos,
 
-                    nuevaPos,
+    [
 
-                    [
+        viajeActual.latitud,
 
-                        viajeActual.latitud,
+        viajeActual.longitud
 
-                        viajeActual.longitud
+    ]
 
-                    ]
-
-                ]);
-
-            }
+);
 
         }
 
@@ -622,6 +613,10 @@ function dibujarRuta(
             )
 
         ],
+
+        showAlternatives:false,
+
+        collapsible:true,
 
         routeWhileDragging:false,
 
