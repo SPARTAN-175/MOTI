@@ -1,3 +1,6 @@
+let viajeActual =
+null;
+
 import { auth, db }
 from "./firebase-config.js";
 
@@ -89,4 +92,36 @@ async function cargarViaje(id){
     ).textContent =
     "En camino al pasajero";
 
+    viajeActual =
+    viaje;
+
 }
+
+document
+.getElementById(
+    "btnNavegar"
+)
+.addEventListener(
+
+    "click",
+
+    ()=>{
+
+        if(!viajeActual)
+        return;
+
+        const url =
+`https://www.google.com/maps/dir/?api=1&destination=${viajeActual.latitud},${viajeActual.longitud}`;
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+    }
+
+);
+
+
+
+
