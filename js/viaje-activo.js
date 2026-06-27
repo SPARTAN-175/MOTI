@@ -1,12 +1,16 @@
 let viajeActual =
 null;
 
+let viajeId =
+null;
+
 import { auth, db }
 from "./firebase-config.js";
 
 import {
     doc,
-    getDoc
+    getDoc,
+    updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -56,6 +60,8 @@ onAuthStateChanged(
 
 async function cargarViaje(id){
 
+   viajeId = id;
+    
     const viajeDoc =
     await getDoc(
 
@@ -122,6 +128,40 @@ document
 
 );
 
+cambiarEstado();
 
+async function cambiarEstado(){
+
+    if(!viajeId)
+    return;
+
+    await updateDoc(
+
+        doc(
+            db,
+            "solicitudes",
+            viajeId
+        ),
+
+        {
+
+            estado:
+            "en_camino"
+
+        }
+
+    );
+
+    document.getElementById(
+        "estadoViaje"
+    ).textContent =
+    "En camino al pasajero";
+
+    document.getElementById(
+        "btnNavegar"
+    ).textContent =
+    "Llegué al pasajero";
+
+}
 
 
