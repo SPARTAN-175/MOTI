@@ -16,6 +16,9 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 let viajeActual = null;
 let viajeId = null;
+let map = null;
+let conductorMarker = null;
+let pasajeroMarker = null;
 
 
 // =========================
@@ -105,6 +108,7 @@ async function cargarViaje(id){
     viajeActual.observaciones || "-";
 
     actualizarInterfaz();
+    await cargarMapa();
 
 }
 
@@ -279,6 +283,123 @@ async function cambiarEstado(nuevoEstado){
 
     await cargarViaje(
         viajeId
+    );
+
+}
+
+
+// =========================
+// CARGAR MAPA
+// =========================
+async function cargarMapa(){
+
+    const usuarioDoc =
+    await getDoc(
+
+        doc(
+            db,
+            "usuarios",
+            auth.currentUser.uid
+        )
+
+    );
+
+    const conductor =
+    usuarioDoc.data();
+
+    const conductorPos = [
+
+        conductor.latitud,
+
+        conductor.longitud
+
+    ];
+
+    const pasajeroPos = [
+
+        viajeActual.latitud,
+
+        viajeActual.longitud
+
+    ];
+
+    if(!map){
+
+        map = L.map("map");
+
+        L.tileLayer(
+
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+            {
+
+                maxZoom:19,
+
+                attribution:"© OpenStreetMap"
+
+            }
+
+        ).addTo(map);
+
+    }
+
+    if(conductorMarker){
+
+        map.removeLayer(
+            conductorMarker
+        );
+
+    }
+
+    if(pasajeroMarker){
+
+        map.removeLayer(
+            pasajeroMarker
+        );
+
+    }
+
+    conductorMarker =
+    L.marker(
+        conductorPos
+    )
+
+    .addTo(map)
+
+    .bindPopup(
+        "Tú"
+    );
+
+    pasajeroMarker =
+    L.marker(
+        pasajeroPos
+    )
+
+    .addTo(map)
+
+    .bindPopup(
+        viajeActual.nombrePasajero
+    );
+
+    const grupo =
+    L.featureGroup([
+
+        conductorMarker,
+
+        pasajeroMarker
+
+    ]);
+
+    map.fitBounds(
+
+        grupo.getBounds(),
+
+        {
+
+            padding:[40,40]
+
+        }
+
     );
 
 }
