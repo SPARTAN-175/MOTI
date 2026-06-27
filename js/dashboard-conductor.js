@@ -43,6 +43,31 @@ document.getElementById(
     "requestContent"
 );
 
+const activeTripCard =
+document.getElementById(
+    "activeTripCard"
+);
+
+const activePassenger =
+document.getElementById(
+    "activePassenger"
+);
+
+const activeDestination =
+document.getElementById(
+    "activeDestination"
+);
+
+const activeStatus =
+document.getElementById(
+    "activeStatus"
+);
+
+const continueTrip =
+document.getElementById(
+    "continueTrip"
+);
+
 let ultimaSolicitud =
 null;
 
@@ -102,8 +127,15 @@ onAuthStateChanged(
         datos.estadoServicio ||
         "disponible";
 
-        actualizarVista();
-        escucharSolicitudes();
+       actualizarVista();
+
+       await verificarViajeActivo();
+
+       if(currentState === "disponible"){
+
+       escucharSolicitudes();
+
+       }
 
         statusButton.addEventListener(
             "click",
@@ -458,3 +490,70 @@ async function aceptarSolicitud(id){
     }
 
 }
+
+async function verificarViajeActivo(){
+
+    const user =
+    auth.currentUser;
+
+    if(!user) return;
+
+    const usuarioDoc =
+    await getDoc(
+
+        doc(
+            db,
+            "usuarios",
+            user.uid
+        )
+
+    );
+
+    const usuario =
+    usuarioDoc.data();
+
+    if(!usuario.viajeActivo){
+
+        activeTripCard.style.display =
+        "none";
+
+        return;
+
+    }
+
+    const viajeDoc =
+    await getDoc(
+
+        doc(
+            db,
+            "solicitudes",
+            usuario.viajeActivo
+        )
+
+    );
+
+    if(!viajeDoc.exists()) return;
+
+    const viaje =
+    viajeDoc.data();
+
+    activePassenger.textContent =
+    viaje.nombrePasajero;
+
+    activeDestination.textContent =
+    viaje.destino;
+
+    activeStatus.textContent =
+    viaje.estado;
+
+    activeTripCard.style.display =
+    "block";
+
+}
+
+
+
+
+
+
+
