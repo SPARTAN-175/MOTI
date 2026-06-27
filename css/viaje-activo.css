@@ -131,3 +131,139 @@
 
     cursor:pointer;
 }
+
+
+
+.container{
+
+    max-width:420px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+.trip-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    margin-top:20px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+/* LOCAL */
+
+.local{
+
+    border-left:6px solid #16a34a;
+}
+
+/* ESPECIAL */
+
+.especial{
+
+    border-left:6px solid #f97316;
+}
+
+.trip-badge{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    background:#f3f4f6;
+
+    margin-bottom:20px;
+}
+
+.trip-section{
+
+    padding:12px 0;
+
+    border-bottom:1px solid #e5e7eb;
+}
+
+.trip-section:last-of-type{
+
+    border-bottom:none;
+}
+
+.label{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#6b7280;
+
+    margin-bottom:4px;
+}
+
+.fare{
+
+    font-size:22px;
+}
+
+.actions{
+
+    margin-top:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.call-btn{
+
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    border:1px solid #d1d5db;
+
+    text-decoration:none;
+
+    color:#374151;
+
+    font-weight:600;
+
+    background:white;
+}
+
+.finish-btn{
+
+    height:55px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
