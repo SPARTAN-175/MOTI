@@ -21,6 +21,7 @@ let map = null;
 let conductorMarker = null;
 let pasajeroMarker = null;
 let rutaLinea = null;
+let rutaControl = null;
 
 
 const motoIcon = L.icon({
@@ -495,41 +496,11 @@ const colorRuta =
     "#16a34a";
 
 
-rutaLinea =
-
-L.polyline(
-
-    [
-
-        conductorPos,
-
-        pasajeroPos
-
-    ],
-
-    {
-
-        color: colorRuta,
-
-        weight:5,
-
-        opacity:0.9
-
-    }
-
-).addTo(map);
-
+dibujarRuta(
+    conductorPos,
+    pasajeroPos
+);
     
-    const grupo =
-L.featureGroup([
-
-    conductorMarker,
-
-    pasajeroMarker,
-
-    rutaLinea
-
-]);
 
     map.fitBounds(
 
@@ -593,7 +564,7 @@ function escucharMovimientoConductor(){
         duration:0.8
 
     }
-
+                
 );
 
             if(rutaLinea){
@@ -621,6 +592,77 @@ function escucharMovimientoConductor(){
 }
 
 
+function dibujarRuta(
+    origen,
+    destino
+){
 
+    if(rutaControl){
+
+        map.removeControl(
+            rutaControl
+        );
+
+    }
+
+    rutaControl =
+
+    L.Routing.control({
+
+        waypoints:[
+
+            L.latLng(
+                origen[0],
+                origen[1]
+            ),
+
+            L.latLng(
+                destino[0],
+                destino[1]
+            )
+
+        ],
+
+        routeWhileDragging:false,
+
+        addWaypoints:false,
+
+        draggableWaypoints:false,
+
+        fitSelectedRoutes:false,
+
+        show:false,
+
+        lineOptions:{
+
+            styles:[{
+
+                color:
+
+                viajeActual.tipoViaje==="especial"
+
+                ?
+
+                "#f97316"
+
+                :
+
+                "#16a34a",
+
+                opacity:0.9,
+
+                weight:6
+
+            }]
+
+        },
+
+        createMarker:()=>null
+
+    })
+
+    .addTo(map);
+
+}
 
 
