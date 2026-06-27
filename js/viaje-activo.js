@@ -1,9 +1,3 @@
-let viajeActual =
-null;
-
-let viajeId =
-null;
-
 import { auth, db }
 from "./firebase-config.js";
 
@@ -18,6 +12,15 @@ import {
     onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+let viajeActual = null;
+let viajeId = null;
+
+
+// =========================
+// CARGAR VIAJE ACTIVO
+// =========================
 
 onAuthStateChanged(
 
@@ -34,9 +37,12 @@ onAuthStateChanged(
                 db,
                 "usuarios",
                 user.uid
+
             )
 
         );
+
+        if(!usuarioDoc.exists()) return;
 
         const usuario =
         usuarioDoc.data();
@@ -50,7 +56,7 @@ onAuthStateChanged(
 
         }
 
-        cargarViaje(
+        await cargarViaje(
             usuario.viajeActivo
         );
 
@@ -58,10 +64,15 @@ onAuthStateChanged(
 
 );
 
+
+// =========================
+// CARGAR DATOS DEL VIAJE
+// =========================
+
 async function cargarViaje(id){
 
-   viajeId = id;
-    
+    viajeId = id;
+
     const viajeDoc =
     await getDoc(
 
@@ -75,33 +86,112 @@ async function cargarViaje(id){
 
     if(!viajeDoc.exists()) return;
 
-    const viaje =
+    viajeActual =
     viajeDoc.data();
 
     document.getElementById(
         "nombrePasajero"
     ).textContent =
-    viaje.nombrePasajero;
+    viajeActual.nombrePasajero;
 
     document.getElementById(
         "destinoViaje"
     ).textContent =
-    viaje.destino;
+    viajeActual.destino;
 
     document.getElementById(
         "referenciaViaje"
     ).textContent =
-    viaje.observaciones || "-";
+    viajeActual.observaciones || "-";
 
-    document.getElementById(
-        "estadoViaje"
-    ).textContent =
-    "En camino al pasajero";
-
-    viajeActual =
-    viaje;
+    actualizarInterfaz();
 
 }
+
+
+// =========================
+// INTERFAZ
+// =========================
+
+function actualizarInterfaz(){
+
+    const estado =
+    document.getElementById(
+        "estadoViaje"
+    );
+
+    const boton =
+    document.getElementById(
+        "btnAccion"
+    );
+
+    switch(viajeActual.estado){
+
+        case "aceptada":
+
+            estado.textContent =
+            "En camino al pasajero";
+
+            boton.textContent =
+            "Iniciar recorrido";
+
+            break;
+
+
+        case "en_camino":
+
+            estado.textContent =
+            "En camino al pasajero";
+
+            boton.textContent =
+            "Llegué al pasajero";
+
+            break;
+
+
+        case "esperando_pasajero":
+
+            estado.textContent =
+            "Esperando al pasajero";
+
+            boton.textContent =
+            "Iniciar viaje";
+
+            break;
+
+
+        case "en_viaje":
+
+            estado.textContent =
+            "Viaje en curso";
+
+            boton.textContent =
+            "Finalizar viaje";
+
+            break;
+
+
+        case "finalizada":
+
+            estado.textContent =
+            "Viaje finalizado";
+
+            boton.textContent =
+            "Viaje finalizado";
+
+            boton.disabled =
+            true;
+
+            break;
+
+    }
+
+}
+
+
+// =========================
+// BOTÓN PRINCIPAL
+// =========================
 
 document
 .getElementById(
@@ -109,13 +199,17 @@ document
 )
 .addEventListener(
 
-    btnAccion.addEventListener(
+    "click",
 
-"click",
-
-ejecutarAccion
+    ejecutarAccion
 
 );
+
+
+// =========================
+// MÁQUINA DE ESTADOS
+// =========================
+
 async function ejecutarAccion(){
 
     switch(viajeActual.estado){
@@ -128,6 +222,7 @@ async function ejecutarAccion(){
 
             break;
 
+
         case "en_camino":
 
             await cambiarEstado(
@@ -136,6 +231,7 @@ async function ejecutarAccion(){
 
             break;
 
+
         case "esperando_pasajero":
 
             await cambiarEstado(
@@ -143,6 +239,7 @@ async function ejecutarAccion(){
             );
 
             break;
+
 
         case "en_viaje":
 
@@ -155,6 +252,11 @@ async function ejecutarAccion(){
     }
 
 }
+
+
+// =========================
+// CAMBIAR ESTADO
+// =========================
 
 async function cambiarEstado(nuevoEstado){
 
@@ -180,5 +282,3 @@ async function cambiarEstado(nuevoEstado){
     );
 
 }
-
-
