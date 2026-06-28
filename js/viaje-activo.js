@@ -267,6 +267,10 @@ document
 
 async function ejecutarAccion(){
 
+console.log("Botón presionado");
+console.log("Estado actual:", viajeActual.estado);
+
+    
     switch(viajeActual.estado){
 
         case "aceptada":
