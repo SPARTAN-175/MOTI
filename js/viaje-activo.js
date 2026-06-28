@@ -20,8 +20,8 @@ let viajeId = null;
 let map = null;
 let conductorMarker = null;
 let pasajeroMarker = null;
-let rutaLinea = null;
 let rutaControl = null;
+let listenerMovimiento = false;
 
 
 const motoIcon = L.icon({
@@ -149,9 +149,17 @@ async function cargarViaje(id){
     ).textContent =
     viajeActual.observaciones || "-";
 
-    actualizarInterfaz();
+   actualizarInterfaz();
+
     await cargarMapa();
-    escucharMovimientoConductor();
+
+    if(!listenerMovimiento){
+
+        escucharMovimientoConductor();
+
+        listenerMovimiento = true;
+
+    }
 
 }
 
@@ -583,81 +591,70 @@ function escucharMovimientoConductor(){
 }
 
 
-function dibujarRuta(
-    origen,
-    destino
-){
+function dibujarRuta(origen,destino){
 
-    if(rutaControl){
+    if(!rutaControl){
 
-        map.removeControl(
-            rutaControl
-        );
+        rutaControl = L.Routing.control({
+
+            waypoints:[
+
+                L.latLng(origen[0], origen[1]),
+
+                L.latLng(destino[0], destino[1])
+
+            ],
+
+            showAlternatives:false,
+
+            collapsible:true,
+
+            routeWhileDragging:false,
+
+            addWaypoints:false,
+
+            draggableWaypoints:false,
+
+            fitSelectedRoutes:false,
+
+            show:false,
+
+            createMarker:()=>null,
+
+            lineOptions:{
+
+                styles:[{
+
+                    color:
+                    viajeActual.tipoViaje==="especial"
+                    ?
+                    "#f97316"
+                    :
+                    "#16a34a",
+
+                    weight:6,
+
+                    opacity:0.9
+
+                }]
+
+            }
+
+        }).addTo(map);
 
     }
 
-    rutaControl =
+    else{
 
-    L.Routing.control({
+        rutaControl.setWaypoints([
 
-        waypoints:[
+            L.latLng(origen[0], origen[1]),
 
-            L.latLng(
-                origen[0],
-                origen[1]
-            ),
+            L.latLng(destino[0], destino[1])
 
-            L.latLng(
-                destino[0],
-                destino[1]
-            )
+        ]);
 
-        ],
-
-        showAlternatives:false,
-
-        collapsible:true,
-
-        routeWhileDragging:false,
-
-        addWaypoints:false,
-
-        draggableWaypoints:false,
-
-        fitSelectedRoutes:false,
-
-        show:false,
-
-        lineOptions:{
-
-            styles:[{
-
-                color:
-
-                viajeActual.tipoViaje==="especial"
-
-                ?
-
-                "#f97316"
-
-                :
-
-                "#16a34a",
-
-                opacity:0.9,
-
-                weight:6
-
-            }]
-
-        },
-
-        createMarker:()=>null
-
-    })
-
-    .addTo(map);
+    }
 
 }
-
 
