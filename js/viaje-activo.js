@@ -705,25 +705,56 @@ rutaControl.on(
 
 async function finalizarViaje(){
 
-    console.log("Entró");
-
     try{
 
         await updateDoc(
-            doc(db,"usuarios",auth.currentUser.uid),
+
+            doc(
+                db,
+                "solicitudes",
+                viajeId
+            ),
+
             {
-                estadoServicio:"disponible",
-                viajeActivo:null
+
+                estado:"finalizada",
+
+                fechaFinalizacion:new Date()
+
             }
+
         );
 
-        console.log("Usuario actualizado");
+        await updateDoc(
 
-    }catch(e){
+            doc(
+                db,
+                "usuarios",
+                auth.currentUser.uid
+            ),
 
-        console.error(e);
+            {
+
+                estadoServicio:"disponible",
+
+                viajeActivo:null
+
+            }
+
+        );
+
+        console.log("Redirigiendo...");
+
+        window.location.replace(
+            "dashboard-conductor.html"
+        );
 
     }
 
-}
+    catch(error){
+
+        console.error(error);
+
+    }
+
 }
