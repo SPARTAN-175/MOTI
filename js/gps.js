@@ -72,10 +72,11 @@ function iniciarGPS(uid){
             );
 
             console.log(
-                "📍 GPS actualizado",
-                lat,
-                lng
-            );
+    "📍 GPS",
+    auth.currentUser?.uid,
+    lat,
+    lng
+);
 
         },
 
