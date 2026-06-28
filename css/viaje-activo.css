@@ -201,4 +201,52 @@
     margin-top:20px;
 
 }
+.navigation-card{
 
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+.navigation-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.navigation-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+.navigation-info div{
+
+    text-align:center;
+
+}
+
+.navigation-info strong{
+
+    display:block;
+
+    font-size:24px;
+
+    margin-top:6px;
+
+    color:#16a34a;
+
+}
