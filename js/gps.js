@@ -7,8 +7,13 @@ import {
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
+
     doc,
+
+    getDoc,
+
     updateDoc
+
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -27,6 +32,9 @@ onAuthStateChanged(
 
 );
 
+let ultimaActualizacion = 0;
+
+let intervaloActualizacion = 30000;
 
 function iniciarGPS(uid){
 
@@ -49,6 +57,50 @@ function iniciarGPS(uid){
 
             const lng =
             position.coords.longitude;
+
+            const ahora = Date.now();
+
+const usuarioDoc =
+await getDoc(
+
+    doc(
+        db,
+        "usuarios",
+        uid
+    )
+
+);
+
+const usuario =
+usuarioDoc.data();
+
+intervaloActualizacion =
+
+usuario.estadoServicio === "en_viaje"
+
+?
+
+5000
+
+:
+
+30000;
+
+if(
+
+    ahora - ultimaActualizacion
+
+    <
+
+    intervaloActualizacion
+
+){
+
+    return;
+
+}
+
+ultimaActualizacion = ahora;
 
             await updateDoc(
 
