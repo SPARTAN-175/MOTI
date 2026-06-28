@@ -699,6 +699,8 @@ rutaControl.on(
 
 async function finalizarViaje(){
 
+console.log("1. Entré a finalizarViaje");
+    
     // Finalizar solicitud
 
     await updateDoc(
@@ -720,6 +722,8 @@ async function finalizarViaje(){
 
     );
 
+    console.log("2. Solicitud actualizada");
+
     // Liberar conductor
 
     await updateDoc(
@@ -740,10 +744,13 @@ async function finalizarViaje(){
 
     );
 
+
+    console.log("3. Conductor liberado");
     alert(
         "Viaje finalizado correctamente."
     );
 
+     console.log("4. Después del alert");
     window.location.href =
     "dashboard-conductor.html";
 
