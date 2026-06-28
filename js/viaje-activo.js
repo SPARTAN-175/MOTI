@@ -705,63 +705,65 @@ rutaControl.on(
 
 async function finalizarViaje(){
 
-console.log("1. Entré a finalizarViaje");
-    
-    // Finalizar solicitud
+    try{
 
-    await updateDoc(
+        console.log("1. Entró a finalizarViaje");
 
-        doc(
-            db,
-            "solicitudes",
-            viajeId
-        ),
+        await updateDoc(
 
-        {
+            doc(
+                db,
+                "solicitudes",
+                viajeId
+            ),
 
-            estado:"finalizada",
+            {
 
-            fechaFinalizacion:
-            new Date()
+                estado:"finalizada",
 
-        }
+                fechaFinalizacion:new Date()
 
-    );
+            }
 
-    console.log("2. Solicitud actualizada");
+        );
 
-    // Liberar conductor
+        console.log("2. Solicitud actualizada");
 
-    await updateDoc(
+        await updateDoc(
 
-        doc(
-            db,
-            "usuarios",
-            auth.currentUser.uid
-        ),
+            doc(
+                db,
+                "usuarios",
+                auth.currentUser.uid
+            ),
 
-        {
+            {
 
-            estadoServicio:"disponible",
+                estadoServicio:"disponible",
 
-            viajeActivo:null
+                viajeActivo:null
 
-        }
+            }
 
-    );
+        );
 
+        console.log("3. Conductor actualizado");
 
-    console.log("3. Conductor liberado");
-    alert(
-        "Viaje finalizado correctamente."
-    );
+        window.location.href =
+        "dashboard-conductor.html";
 
-     console.log("4. Después del alert");
-    window.location.href =
-    "dashboard-conductor.html";
+    }
+
+    catch(error){
+
+        console.error(
+            "ERROR AL FINALIZAR:",
+            error
+        );
+
+    }
 
 }
-
 
 
 
