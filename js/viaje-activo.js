@@ -634,6 +634,54 @@ function dibujarRuta(origen,destino){
 
         }).addTo(map);
 
+
+
+
+rutaControl.on(
+
+    "routesfound",
+
+    function(e){
+
+        const ruta =
+        e.routes[0];
+
+        const distancia =
+        (
+            ruta.summary.totalDistance
+            /
+            1000
+        ).toFixed(1);
+
+        const tiempo =
+        Math.ceil(
+
+            ruta.summary.totalTime
+            /
+            60
+
+        );
+
+        document.getElementById(
+
+            "distanceText"
+
+        ).textContent =
+        distancia + " km";
+
+        document.getElementById(
+
+            "timeText"
+
+        ).textContent =
+        tiempo + " min";
+
+    }
+
+);
+
+        
+
     }
 
     else{
