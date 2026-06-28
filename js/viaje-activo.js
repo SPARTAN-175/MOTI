@@ -697,7 +697,6 @@ rutaControl.on(
 }
 
 
-
 async function finalizarViaje(){
 
     // Finalizar solicitud
@@ -712,7 +711,10 @@ async function finalizarViaje(){
 
         {
 
-            estado:"finalizada"
+            estado:"finalizada",
+
+            fechaFinalizacion:
+            new Date()
 
         }
 
@@ -737,6 +739,13 @@ async function finalizarViaje(){
         }
 
     );
+
+    alert(
+        "Viaje finalizado correctamente."
+    );
+
+    window.location.href =
+    "dashboard-conductor.html";
 
 }
 
