@@ -726,6 +726,4 @@ async function finalizarViaje(){
     }
 
 }
-
-
-
+}
