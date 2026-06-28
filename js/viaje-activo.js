@@ -180,6 +180,8 @@ function actualizarInterfaz(){
         "btnAccion"
     );
 
+    boton.disabled = false;
+
     switch(viajeActual.estado){
 
         case "aceptada":
