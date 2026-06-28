@@ -298,11 +298,9 @@ async function ejecutarAccion(){
 
         case "en_viaje":
 
-            await cambiarEstado(
-                "finalizada"
-            );
+    await finalizarViaje();
 
-            break;
+    break;
 
     }
 
@@ -697,4 +695,51 @@ rutaControl.on(
     }
 
 }
+
+
+
+async function finalizarViaje(){
+
+    // Finalizar solicitud
+
+    await updateDoc(
+
+        doc(
+            db,
+            "solicitudes",
+            viajeId
+        ),
+
+        {
+
+            estado:"finalizada"
+
+        }
+
+    );
+
+    // Liberar conductor
+
+    await updateDoc(
+
+        doc(
+            db,
+            "usuarios",
+            auth.currentUser.uid
+        ),
+
+        {
+
+            estadoServicio:"disponible",
+
+            viajeActivo:null
+
+        }
+
+    );
+
+}
+
+
+
 
