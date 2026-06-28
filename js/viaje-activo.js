@@ -483,14 +483,6 @@ L.marker(
 
 
 
-    if(rutaLinea){
-
-    map.removeLayer(
-        rutaLinea
-    );
-
-}
-
 dibujarRuta(
     conductorPos,
     pasajeroPos
