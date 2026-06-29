@@ -46,8 +46,7 @@ destino:"Plan de Ayala",
 
 tarifa:120,
 
-activo:true
-
+aceptaViaje:false
 }
 
 ]
@@ -90,7 +89,7 @@ destino:"Nuevo Xochimilco",
 
 tarifa:150,
 
-activo:true
+aceptaViaje:false
 
 }
 
@@ -118,7 +117,7 @@ destino:"Plan de Ayala",
 
 tarifa:130,
 
-activo:true
+aceptaViaje:false
 
 }
 
@@ -144,8 +143,7 @@ rutasEspeciales:[
 
 destino:"Plan de Ayala",
 
-activo:false
-
+aceptaViaje:false
 }
 
 ]
@@ -170,7 +168,7 @@ rutasEspeciales:[
 
 destino:"Plan de Ayala",
 
-activo:true
+aceptaViaje:false
 
 }
 
@@ -196,7 +194,7 @@ rutasEspeciales:[
 
 destino:"Plan de Ayala",
 
-activo:true
+aceptaViaje:false
 
 }
 
