@@ -23,6 +23,11 @@ import {
 }
 from "./filtrar-rutas-especiales.js";
 
+import {
+    seleccionarGrupos
+}
+from "./seleccionar-grupo.js";
+
 
 const viaje={
 
@@ -32,135 +37,99 @@ const viaje={
 
 };
 
-
 const conductores=[
 
 {
-
 nombre:"Carlos",
-
 estadoServicio:"disponible",
-
 latitud:17.409058,
-
 longitud:-93.327280,
-
 minutosSinViaje:35,
-
 rutasEspeciales:[
-
 {
-
 destino:"Plan de Ayala",
-
 tarifa:120,
-
 activo:true
-
-}
-
-]
-
+}]
 },
 
 {
-
 nombre:"Juan",
-
 estadoServicio:"en_viaje",
-
 latitud:17.410500,
-
 longitud:-93.329500,
-
 minutosSinViaje:5,
-
 rutasEspeciales:[]
-
 },
 
 {
-
 nombre:"Pedro",
-
 estadoServicio:"disponible",
-
 latitud:17.408700,
-
 longitud:-93.327100,
-
 minutosSinViaje:55,
-
 rutasEspeciales:[
-
 {
-
 destino:"Nuevo Xochimilco",
-
 tarifa:150,
-
 activo:true
-
-}
-
-]
-
+}]
 },
 
 {
-
 nombre:"Miguel",
-
 estadoServicio:"disponible",
-
 latitud:17.412000,
-
 longitud:-93.331000,
-
 minutosSinViaje:15,
-
 rutasEspeciales:[
-
 {
-
 destino:"Plan de Ayala",
-
 tarifa:130,
-
 activo:true
-
-}
-
-]
-
+}]
 },
 
 {
-
 nombre:"José",
-
 estadoServicio:"disponible",
-
 latitud:17.414000,
-
 longitud:-93.333000,
-
 minutosSinViaje:45,
-
 rutasEspeciales:[
+{
+destino:"Plan de Ayala",
+tarifa:120,
+activo:false
+}]
+},
 
 {
-
+nombre:"Antonio",
+estadoServicio:"disponible",
+latitud:17.413000,
+longitud:-93.330000,
+minutosSinViaje:70,
+rutasEspeciales:[
+{
 destino:"Plan de Ayala",
-
 tarifa:120,
+activo:true
+}]
+},
 
-activo:false
-
-}
-
-]
-
+{
+nombre:"Luis",
+estadoServicio:"disponible",
+latitud:17.415000,
+longitud:-93.334000,
+minutosSinViaje:25,
+rutasEspeciales:[
+{
+destino:"Plan de Ayala",
+tarifa:120,
+activo:true
+}]
 }
 
 ];
@@ -174,47 +143,30 @@ longitud:-93.327078
 };
 
 document
-
-.getElementById(
-
-"btnProbar"
-
-)
-
+.getElementById("btnProbar")
 .addEventListener(
-
 "click",
-
 ejecutarMotor
-
 );
 
 function ejecutarMotor(){
 
 let disponibles=
-
-buscarConductores(
-
-conductores
-
-);
+buscarConductores(conductores);
 
 disponibles.forEach(
 
 conductor=>{
 
 conductor.distancia=
-
 Math.round(
 
 calcularDistancia(
 
 pasajero.latitud,
-
 pasajero.longitud,
 
 conductor.latitud,
-
 conductor.longitud
 
 )
@@ -225,63 +177,46 @@ conductor.longitud
 
 );
 
-let radio=
+const radio=
+filtrarRadio(disponibles);
 
-filtrarRadio(
-
-disponibles
-
-);
-
-let especiales=
-
+const especiales=
 filtrarRutasEspeciales(
-
 radio.conductores,
-
 viaje
-
 );
 
-let puntuados=
-
-calcularPuntaje(
-
-especiales
-
-);
+const puntuados=
+calcularPuntaje(especiales);
 
 puntuados.sort(
+(a,b)=>b.puntaje-a.puntaje
+);
 
-(a,b)=>
-
-b.puntaje-a.puntaje
-
+const grupos=
+seleccionarGrupos(
+puntuados
 );
 
 mostrarResultado(
-
-puntuados,
-
+grupos,
 radio.radio
-
 );
 
 }
 
-function mostrarResultado(lista,radio){
+function mostrarResultado(grupos,radio){
 
 const tabla=
-
-document.getElementById(
-
-"tablaConductores"
-
-);
+document.getElementById("tablaConductores");
 
 tabla.innerHTML="";
 
-lista.forEach(
+grupos.forEach(
+
+(grupo,numeroGrupo)=>{
+
+grupo.forEach(
 
 (conductor,index)=>{
 
@@ -289,7 +224,13 @@ tabla.innerHTML+=`
 
 <tr>
 
-<td>${conductor.nombre}</td>
+<td>
+
+Grupo ${numeroGrupo+1}<br>
+
+<strong>${conductor.nombre}</strong>
+
+</td>
 
 <td>${conductor.estadoServicio}</td>
 
@@ -307,11 +248,11 @@ tabla.innerHTML+=`
 
 );
 
-document.getElementById(
+}
 
-"log"
+);
 
-).textContent=
+document.getElementById("log").textContent=
 
 `Tipo de viaje: ${viaje.tipoViaje}
 
@@ -319,8 +260,12 @@ Destino: ${viaje.destino}
 
 Radio utilizado: ${radio}
 
-Conductores compatibles: ${lista.length}
+Grupos generados: ${grupos.length}
 
-✔ Filtro de rutas especiales funcionando correctamente.`;
+Conductores del primer grupo: ${grupos[0].length}
+
+✅ Selección de grupos funcionando correctamente.`;
+
+console.log("Grupos generados:",grupos);
 
 }
