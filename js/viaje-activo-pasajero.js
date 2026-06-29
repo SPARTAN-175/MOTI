@@ -4,18 +4,52 @@ from "./firebase-config.js";
 import {
 
     doc,
-
     getDoc,
-
     onSnapshot
 
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-// =========================
-// OBTENER ID DEL VIAJE
-// =========================
+// ========================================
+// VARIABLES
+// ========================================
+
+let map = null;
+
+let pasajeroMarker = null;
+
+let conductorMarker = null;
+
+
+// ========================================
+// ICONOS
+// ========================================
+
+const motoIcon = L.icon({
+
+    iconUrl:"../assets/icons/mototaxi.svg",
+
+    iconSize:[42,42],
+
+    iconAnchor:[21,21]
+
+});
+
+const pasajeroIcon = L.icon({
+
+    iconUrl:"../assets/icons/pasajero.svg",
+
+    iconSize:[40,40],
+
+    iconAnchor:[20,20]
+
+});
+
+
+// ========================================
+// ID DEL VIAJE
+// ========================================
 
 const params =
 
@@ -29,104 +63,84 @@ const viajeId =
 
 params.get("id");
 
-
 if(!viajeId){
 
-    alert("Viaje no encontrado.");
+    window.location.href=
 
-    window.location.href =
     "dashboard-pasajero.html";
 
 }
 
 
-// =========================
+// ========================================
 // REFERENCIAS HTML
-// =========================
+// ========================================
 
 const estadoViaje =
 
- document.getElementById(
+document.getElementById(
+
     "estadoViaje"
+
 );
 
 const nombreConductor =
 
 document.getElementById(
+
     "nombreConductor"
+
 );
 
 const destinoViaje =
 
 document.getElementById(
+
     "destinoViaje"
+
 );
 
 
+// ========================================
+// CREAR MAPA
+// ========================================
 
+map = L.map("map").setView(
 
+    [17.4088035,-93.327078],
 
+    16
 
-// =========================
-// MAPA (PRUEBA)
-// =========================
+);
 
-let map = null;
+L.tileLayer(
 
-window.addEventListener(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
-    "load",
+    {
 
-    ()=>{
-
-        map = L.map("map").setView(
-
-            [17.4088035,-93.327078],
-
-            16
-
-        );
-
-        L.tileLayer(
-
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
-            {
-
-                attribution:"© OpenStreetMap"
-
-            }
-
-        ).addTo(map);
+        attribution:"© OpenStreetMap"
 
     }
 
-);
+).addTo(map);
 
 
-
-
-
-// =========================
-// ESCUCHAR VIAJE
-// =========================
-
-const viajeRef =
-
-doc(
-
-    db,
-
-    "solicitudes",
-
-    viajeId
-
-);
-
+// ========================================
+// ESCUCHAR SOLICITUD
+// ========================================
 
 onSnapshot(
 
-    viajeRef,
+    doc(
+
+        db,
+
+        "solicitudes",
+
+        viajeId
+
+    ),
 
     async(docSnap)=>{
 
@@ -136,19 +150,69 @@ onSnapshot(
 
         docSnap.data();
 
-        console.log(viaje);
-
-        estadoViaje.textContent =
+        estadoViaje.textContent=
 
         viaje.estado;
 
-        destinoViaje.textContent =
+        destinoViaje.textContent=
 
         viaje.destino;
 
+        // =========================
+        // PASAJERO
+        // =========================
+
+        const pasajeroPos=[
+
+            viaje.latitud,
+
+            viaje.longitud
+
+        ];
+
+        if(!pasajeroMarker){
+
+            pasajeroMarker=
+
+            L.marker(
+
+                pasajeroPos,
+
+                {
+
+                    icon:pasajeroIcon
+
+                }
+
+            )
+
+            .addTo(map)
+
+            .bindPopup(
+
+                "Tú"
+
+            );
+
+        }
+
+        else{
+
+            pasajeroMarker.setLatLng(
+
+                pasajeroPos
+
+            );
+
+        }
+
+        // =========================
+        // CONDUCTOR
+        // =========================
+
         if(viaje.conductorId){
 
-            const conductorDoc =
+            const conductorDoc=
 
             await getDoc(
 
@@ -166,13 +230,79 @@ onSnapshot(
 
             if(conductorDoc.exists()){
 
-                const conductor =
+                const conductor=
 
                 conductorDoc.data();
 
-                nombreConductor.textContent =
+                nombreConductor.textContent=
 
                 conductor.nombre;
+
+                const conductorPos=[
+
+                    conductor.latitud,
+
+                    conductor.longitud
+
+                ];
+
+                if(!conductorMarker){
+
+                    conductorMarker=
+
+                    L.marker(
+
+                        conductorPos,
+
+                        {
+
+                            icon:motoIcon
+
+                        }
+
+                    )
+
+                    .addTo(map)
+
+                    .bindPopup(
+
+                        conductor.nombre
+
+                    );
+
+                }
+
+                else{
+
+                    conductorMarker.setLatLng(
+
+                        conductorPos
+
+                    );
+
+                }
+
+                const grupo=
+
+                L.featureGroup([
+
+                    pasajeroMarker,
+
+                    conductorMarker
+
+                ]);
+
+                map.fitBounds(
+
+                    grupo.getBounds(),
+
+                    {
+
+                        padding:[40,40]
+
+                    }
+
+                );
 
             }
 
