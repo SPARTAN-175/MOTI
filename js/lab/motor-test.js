@@ -38,6 +38,8 @@ longitud:-93.327280,
 
 minutosSinViaje:35,
 
+aceptaViaje:false,
+        
 rutasEspeciales:[
 
 {
@@ -46,7 +48,9 @@ destino:"Plan de Ayala",
 
 tarifa:120,
 
-aceptaViaje:false
+activo:true
+
+
 }
 
 ]
@@ -81,6 +85,8 @@ longitud:-93.327100,
 
 minutosSinViaje:55,
 
+aceptaViaje:false,
+
 rutasEspeciales:[
 
 {
@@ -89,7 +95,7 @@ destino:"Nuevo Xochimilco",
 
 tarifa:150,
 
-aceptaViaje:false
+activo:true
 
 }
 
@@ -109,6 +115,8 @@ longitud:-93.331000,
 
 minutosSinViaje:15,
 
+aceptaViaje:false,
+
 rutasEspeciales:[
 
 {
@@ -117,7 +125,7 @@ destino:"Plan de Ayala",
 
 tarifa:130,
 
-aceptaViaje:false
+activo:true
 
 }
 
@@ -137,13 +145,18 @@ longitud:-93.333000,
 
 minutosSinViaje:45,
 
+aceptaViaje:false,
+
 rutasEspeciales:[
 
 {
 
 destino:"Plan de Ayala",
 
-aceptaViaje:false
+tarifa:110,
+
+activo:true
+
 }
 
 ]
@@ -162,13 +175,17 @@ longitud:-93.330000,
 
 minutosSinViaje:70,
 
+aceptaViaje:false,
+
 rutasEspeciales:[
 
 {
 
 destino:"Plan de Ayala",
 
-aceptaViaje:false
+tarifa:130,
+
+activo:true
 
 }
 
@@ -188,13 +205,15 @@ longitud:-93.334000,
 
 minutosSinViaje:25,
 
+aceptaViaje:false,
+
 rutasEspeciales:[
 
 {
 
 destino:"Plan de Ayala",
 
-aceptaViaje:false
+activo:true
 
 }
 
@@ -234,13 +253,17 @@ function probarMotor(){
 
 const resultado=
 
-ejecutarMotor(
+ejecutarMotor(...);
 
-conductores,
+mostrarTabla(...);
 
-viaje,
+mostrarLog(...);
 
-pasajero
+await iniciarDispatcher(
+
+resultado.grupos,
+
+viaje
 
 );
 
