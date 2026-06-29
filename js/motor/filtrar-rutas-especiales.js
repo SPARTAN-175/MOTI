@@ -6,6 +6,9 @@ export function filtrarRutasEspeciales(
 
 ){
 
+    // Si el viaje no es especial,
+    // todos participan.
+
     if(
 
         viaje.tipoViaje !== "especial"
@@ -20,15 +23,22 @@ export function filtrarRutasEspeciales(
 
         conductor=>{
 
-            return conductor.rutasEspeciales.some(
+            // Si el conductor no tiene rutas especiales,
+            // usar un arreglo vacío.
+
+            const rutas =
+
+            conductor.rutasEspeciales || [];
+
+            return rutas.some(
 
                 ruta=>
 
-                    ruta.destino===viaje.destino
+                    ruta.destino === viaje.destino
 
                     &&
 
-                    ruta.activo===true
+                    ruta.activo === true
 
             );
 
