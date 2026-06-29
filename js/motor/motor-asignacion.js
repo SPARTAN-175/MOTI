@@ -1,10 +1,10 @@
 import {
 
-buscarConductores
+calcularDistancia
 
 }
 
-from "./buscar-conductores.js";
+from "./calcular-distancia.js";
 
 const conductores=[
 
@@ -12,7 +12,11 @@ const conductores=[
 
 nombre:"Carlos",
 
-estadoServicio:"disponible"
+estadoServicio:"disponible",
+
+latitud:17.409058,
+
+longitud:-93.327280
 
 },
 
@@ -20,7 +24,11 @@ estadoServicio:"disponible"
 
 nombre:"Juan",
 
-estadoServicio:"en_viaje"
+estadoServicio:"en_viaje",
+
+latitud:17.410500,
+
+longitud:-93.329500
 
 },
 
@@ -28,7 +36,11 @@ estadoServicio:"en_viaje"
 
 nombre:"Pedro",
 
-estadoServicio:"disponible"
+estadoServicio:"disponible",
+
+latitud:17.408700,
+
+longitud:-93.327100
 
 },
 
@@ -36,7 +48,11 @@ estadoServicio:"disponible"
 
 nombre:"Luis",
 
-estadoServicio:"ocupado"
+estadoServicio:"ocupado",
+
+latitud:17.420000,
+
+longitud:-93.330000
 
 },
 
@@ -44,11 +60,23 @@ estadoServicio:"ocupado"
 
 nombre:"Miguel",
 
-estadoServicio:"disponible"
+estadoServicio:"disponible",
+
+latitud:17.412000,
+
+longitud:-93.331000
 
 }
 
 ];
+
+const pasajero={
+
+latitud:17.4088035,
+
+longitud:-93.327078
+
+};
 
 const boton=
 
