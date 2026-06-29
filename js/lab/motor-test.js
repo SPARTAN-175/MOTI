@@ -1,7 +1,9 @@
 import {
-    ejecutarMotor
+
+    obtenerConductores
+
 }
-from "../motor/motor-asignacion.js";
+from "../motor/obtener-conductores.js";
 
 import {
     mostrarTabla,
@@ -258,7 +260,19 @@ document
 // EJECUTAR MOTOR
 // ========================================
 
-function probarMotor(){
+async function probarMotor(){
+
+    const conductores =
+
+    await obtenerConductores();
+
+    console.log(
+
+        "Conductores desde Firebase:",
+
+        conductores
+
+    );
 
     const resultado = ejecutarMotor(
 
@@ -279,12 +293,6 @@ function probarMotor(){
     mostrarLog(
 
         resultado.log
-
-    );
-
-    console.log(
-
-        resultado
 
     );
 
