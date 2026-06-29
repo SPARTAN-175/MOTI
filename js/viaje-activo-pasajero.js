@@ -56,6 +56,20 @@ document.getElementById(
     "nombreConductor"
 );
 
+const destinoViaje =
+
+document.getElementById(
+    "destinoViaje"
+);
+
+
+
+
+
+
+// =========================
+// MAPA (PRUEBA)
+// =========================
 
 let map = null;
 
@@ -91,17 +105,6 @@ window.addEventListener(
 
 
 
-
-
-
-
-
-
-const destinoViaje =
-
-document.getElementById(
-    "destinoViaje"
-);
 
 
 // =========================
