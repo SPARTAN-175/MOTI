@@ -28,7 +28,6 @@ import {
 }
 from "./seleccionar-grupo.js";
 
-
 const viaje={
 
     tipoViaje:"especial",
@@ -99,7 +98,6 @@ minutosSinViaje:45,
 rutasEspeciales:[
 {
 destino:"Plan de Ayala",
-tarifa:120,
 activo:false
 }]
 },
@@ -113,7 +111,6 @@ minutosSinViaje:70,
 rutasEspeciales:[
 {
 destino:"Plan de Ayala",
-tarifa:120,
 activo:true
 }]
 },
@@ -127,7 +124,6 @@ minutosSinViaje:25,
 rutasEspeciales:[
 {
 destino:"Plan de Ayala",
-tarifa:120,
 activo:true
 }]
 }
@@ -144,21 +140,27 @@ longitud:-93.327078
 
 document
 .getElementById("btnProbar")
-.addEventListener(
-"click",
-ejecutarMotor
-);
+.addEventListener("click",ejecutarMotor);
 
 function ejecutarMotor(){
 
+let log=[];
+
+log.push("🚖 MOTI ENGINE INICIADO");
+
 let disponibles=
 buscarConductores(conductores);
+
+log.push(`✅ Conductores registrados: ${conductores.length}`);
+
+log.push(`✅ Disponibles: ${disponibles.length}`);
 
 disponibles.forEach(
 
 conductor=>{
 
 conductor.distancia=
+
 Math.round(
 
 calcularDistancia(
@@ -177,37 +179,74 @@ conductor.longitud
 
 );
 
+log.push("✅ Distancias calculadas.");
+
 const radio=
+
 filtrarRadio(disponibles);
 
+log.push(`✅ Radio dinámico aplicado: ${radio.radio}`);
+
+log.push(`✅ Conductores cercanos: ${radio.conductores.length}`);
+
 const especiales=
+
 filtrarRutasEspeciales(
+
 radio.conductores,
+
 viaje
+
 );
+
+if(viaje.tipoViaje==="especial"){
+
+log.push("✅ Viaje especial detectado.");
+
+log.push(`✅ Compatibles con la ruta: ${especiales.length}`);
+
+}
 
 const puntuados=
+
 calcularPuntaje(especiales);
 
+log.push("✅ Puntajes calculados.");
+
 puntuados.sort(
+
 (a,b)=>b.puntaje-a.puntaje
+
 );
+
+log.push("✅ Conductores ordenados.");
 
 const grupos=
+
 seleccionarGrupos(
+
 puntuados
+
 );
 
+log.push(`✅ Grupos creados: ${grupos.length}`);
+
+log.push("🏁 MOTOR FINALIZADO.");
+
 mostrarResultado(
+
 grupos,
-radio.radio
+
+log
+
 );
 
 }
 
-function mostrarResultado(grupos,radio){
+function mostrarResultado(grupos,log){
 
 const tabla=
+
 document.getElementById("tablaConductores");
 
 tabla.innerHTML="";
@@ -226,7 +265,9 @@ tabla.innerHTML+=`
 
 <td>
 
-Grupo ${numeroGrupo+1}<br>
+Grupo ${numeroGrupo+1}
+
+<br>
 
 <strong>${conductor.nombre}</strong>
 
@@ -252,20 +293,14 @@ Grupo ${numeroGrupo+1}<br>
 
 );
 
-document.getElementById("log").textContent=
+document.getElementById(
 
-`Tipo de viaje: ${viaje.tipoViaje}
+"log"
 
-Destino: ${viaje.destino}
+).textContent=
 
-Radio utilizado: ${radio}
+log.join("\n");
 
-Grupos generados: ${grupos.length}
-
-Conductores del primer grupo: ${grupos[0].length}
-
-✅ Selección de grupos funcionando correctamente.`;
-
-console.log("Grupos generados:",grupos);
+console.log(grupos);
 
 }
