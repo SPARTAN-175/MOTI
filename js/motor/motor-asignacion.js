@@ -1,18 +1,14 @@
-import {
-    buscarConductores
-}
+import { buscarConductores }
 from "./buscar-conductores.js";
 
-import {
-    calcularDistancia
-}
+import { calcularDistancia }
 from "./calcular-distancia.js";
 
-import {
-    filtrarRadio
-}
+import { filtrarRadio }
 from "./filtrar-radio.js";
 
+import { calcularPuntaje }
+from "./calcular-puntaje.js";
 
 const conductores=[
 
@@ -20,42 +16,48 @@ const conductores=[
 nombre:"Carlos",
 estadoServicio:"disponible",
 latitud:17.409058,
-longitud:-93.327280
+longitud:-93.327280,
+minutosSinViaje:35
 },
 
 {
 nombre:"Juan",
 estadoServicio:"en_viaje",
 latitud:17.410500,
-longitud:-93.329500
+longitud:-93.329500,
+minutosSinViaje:5
 },
 
 {
 nombre:"Pedro",
 estadoServicio:"disponible",
 latitud:17.408700,
-longitud:-93.327100
+longitud:-93.327100,
+minutosSinViaje:55
 },
 
 {
 nombre:"Luis",
 estadoServicio:"ocupado",
 latitud:17.420000,
-longitud:-93.330000
+longitud:-93.330000,
+minutosSinViaje:60
 },
 
 {
 nombre:"Miguel",
 estadoServicio:"disponible",
 latitud:17.412000,
-longitud:-93.331000
+longitud:-93.331000,
+minutosSinViaje:15
 },
 
 {
 nombre:"José",
 estadoServicio:"disponible",
 latitud:17.414000,
-longitud:-93.333000
+longitud:-93.333000,
+minutosSinViaje:45
 }
 
 ];
@@ -70,11 +72,7 @@ longitud:-93.327078
 
 document
 
-.getElementById(
-
-"btnProbar"
-
-)
+.getElementById("btnProbar")
 
 .addEventListener(
 
@@ -88,11 +86,7 @@ function ejecutarMotor(){
 
 let disponibles=
 
-buscarConductores(
-
-conductores
-
-);
+buscarConductores(conductores);
 
 disponibles.forEach(
 
@@ -120,35 +114,45 @@ conductor.longitud
 
 );
 
-const resultado=
+let resultado=
 
-filtrarRadio(
+filtrarRadio(disponibles);
 
-disponibles
+let puntuados=
+
+calcularPuntaje(
+
+resultado.conductores
+
+);
+
+puntuados.sort(
+
+(a,b)=>
+
+b.puntaje-a.puntaje
 
 );
 
 mostrarResultado(
 
-resultado
+puntuados,
+
+resultado.radio
 
 );
 
 }
 
-function mostrarResultado(resultado){
+function mostrarResultado(lista,radio){
 
 const tabla=
 
-document.getElementById(
-
-"tablaConductores"
-
-);
+document.getElementById("tablaConductores");
 
 tabla.innerHTML="";
 
-resultado.conductores.forEach(
+lista.forEach(
 
 (conductor,index)=>{
 
@@ -162,7 +166,7 @@ tabla.innerHTML+=`
 
 <td>${conductor.distancia} m</td>
 
-<td>--</td>
+<td>${conductor.puntaje}</td>
 
 <td>${index+1}</td>
 
@@ -184,10 +188,10 @@ document.getElementById(
 
 Disponibles: ${buscarConductores(conductores).length}
 
-Radio utilizado: ${resultado.radio}
+Radio utilizado: ${radio}
 
-Conductores encontrados: ${resultado.conductores.length}
+Conductores candidatos: ${lista.length}
 
-✔ Radio dinámico funcionando correctamente.`;
+✔ Puntajes calculados correctamente.`;
 
 }
