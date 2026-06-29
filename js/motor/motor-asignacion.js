@@ -1,45 +1,137 @@
-import { buscarConductores }
+import {
+
+buscarConductores
+
+}
 
 from "./buscar-conductores.js";
 
-const conductores = [
+const conductores=[
 
-    {
+{
 
-        nombre:"Carlos",
+nombre:"Carlos",
 
-        estadoServicio:"disponible"
+estadoServicio:"disponible"
 
-    },
+},
 
-    {
+{
 
-        nombre:"Juan",
+nombre:"Juan",
 
-        estadoServicio:"en_viaje"
+estadoServicio:"en_viaje"
 
-    },
+},
 
-    {
+{
 
-        nombre:"Pedro",
+nombre:"Pedro",
 
-        estadoServicio:"disponible"
+estadoServicio:"disponible"
 
-    },
+},
 
-    {
+{
 
-        nombre:"Luis",
+nombre:"Luis",
 
-        estadoServicio:"ocupado"
+estadoServicio:"ocupado"
 
-    }
+},
+
+{
+
+nombre:"Miguel",
+
+estadoServicio:"disponible"
+
+}
 
 ];
 
-const disponibles =
+const boton=
 
-buscarConductores(conductores);
+document.getElementById(
 
-console.log(disponibles);
+"btnProbar"
+
+);
+
+boton.addEventListener(
+
+"click",
+
+()=>{
+
+const disponibles=
+
+buscarConductores(
+
+conductores
+
+);
+
+mostrarResultado(
+
+disponibles
+
+);
+
+}
+
+);
+
+function mostrarResultado(lista){
+
+const tabla=
+
+document.getElementById(
+
+"tablaConductores"
+
+);
+
+tabla.innerHTML="";
+
+lista.forEach(
+
+(conductor,index)=>{
+
+const fila=`
+
+<tr>
+
+<td>${conductor.nombre}</td>
+
+<td>${conductor.estadoServicio}</td>
+
+<td>--</td>
+
+<td>--</td>
+
+<td>${index+1}</td>
+
+</tr>
+
+`;
+
+tabla.innerHTML+=fila;
+
+}
+
+);
+
+document.getElementById(
+
+"log"
+
+).textContent=
+
+`Conductores encontrados: ${conductores.length}
+
+Disponibles: ${lista.length}
+
+Primer módulo funcionando correctamente.`;
+
+}
