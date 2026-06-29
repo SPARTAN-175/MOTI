@@ -14,200 +14,180 @@ import {
 from "./filtrar-radio.js";
 
 
-const conductores = [
+const conductores=[
 
-    {
+{
+nombre:"Carlos",
+estadoServicio:"disponible",
+latitud:17.409058,
+longitud:-93.327280
+},
 
-        nombre:"Carlos",
+{
+nombre:"Juan",
+estadoServicio:"en_viaje",
+latitud:17.410500,
+longitud:-93.329500
+},
 
-        estadoServicio:"disponible",
+{
+nombre:"Pedro",
+estadoServicio:"disponible",
+latitud:17.408700,
+longitud:-93.327100
+},
 
-        latitud:17.409058,
+{
+nombre:"Luis",
+estadoServicio:"ocupado",
+latitud:17.420000,
+longitud:-93.330000
+},
 
-        longitud:-93.327280
+{
+nombre:"Miguel",
+estadoServicio:"disponible",
+latitud:17.412000,
+longitud:-93.331000
+},
 
-    },
-
-    {
-
-        nombre:"Juan",
-
-        estadoServicio:"en_viaje",
-
-        latitud:17.410500,
-
-        longitud:-93.329500
-
-    },
-
-    {
-
-        nombre:"Pedro",
-
-        estadoServicio:"disponible",
-
-        latitud:17.408700,
-
-        longitud:-93.327100
-
-    },
-
-    {
-
-        nombre:"Luis",
-
-        estadoServicio:"ocupado",
-
-        latitud:17.420000,
-
-        longitud:-93.330000
-
-    },
-
-    {
-
-        nombre:"Miguel",
-
-        estadoServicio:"disponible",
-
-        latitud:17.412000,
-
-        longitud:-93.331000
-
-    }
+{
+nombre:"José",
+estadoServicio:"disponible",
+latitud:17.414000,
+longitud:-93.333000
+}
 
 ];
 
-const pasajero = {
+const pasajero={
 
-    latitud:17.4088035,
+latitud:17.4088035,
 
-    longitud:-93.327078
+longitud:-93.327078
 
 };
 
-const RADIO_BUSQUEDA = 300;
+document
 
-const boton =
+.getElementById(
 
-document.getElementById(
+"btnProbar"
 
-    "btnProbar"
+)
 
-);
+.addEventListener(
 
-boton.addEventListener(
+"click",
 
-    "click",
-
-    ejecutarMotor
+ejecutarMotor
 
 );
 
 function ejecutarMotor(){
 
-    let disponibles =
+let disponibles=
 
-    buscarConductores(
+buscarConductores(
 
-        conductores
+conductores
 
-    );
+);
 
-    disponibles.forEach(
+disponibles.forEach(
 
-        conductor=>{
+conductor=>{
 
-            conductor.distancia =
+conductor.distancia=
 
-            Math.round(
+Math.round(
 
-                calcularDistancia(
+calcularDistancia(
 
-                    pasajero.latitud,
+pasajero.latitud,
 
-                    pasajero.longitud,
+pasajero.longitud,
 
-                    conductor.latitud,
+conductor.latitud,
 
-                    conductor.longitud
+conductor.longitud
 
-                )
+)
 
-            );
-
-        }
-
-    );
-
-    disponibles =
-
-    filtrarRadio(
-
-        disponibles,
-
-        RADIO_BUSQUEDA
-
-    );
-
-    mostrarResultado(
-
-        disponibles
-
-    );
+);
 
 }
 
-function mostrarResultado(lista){
+);
 
-    const tabla =
+const resultado=
 
-    document.getElementById(
+filtrarRadio(
 
-        "tablaConductores"
+disponibles
 
-    );
+);
 
-    tabla.innerHTML = "";
+mostrarResultado(
 
-    lista.forEach(
+resultado
 
-        (conductor,index)=>{
+);
 
-            tabla.innerHTML += `
+}
 
-            <tr>
+function mostrarResultado(resultado){
 
-                <td>${conductor.nombre}</td>
+const tabla=
 
-                <td>${conductor.estadoServicio}</td>
+document.getElementById(
 
-                <td>${conductor.distancia} m</td>
+"tablaConductores"
 
-                <td>--</td>
+);
 
-                <td>${index+1}</td>
+tabla.innerHTML="";
 
-            </tr>
+resultado.conductores.forEach(
 
-            `;
+(conductor,index)=>{
 
-        }
+tabla.innerHTML+=`
 
-    );
+<tr>
 
-    document.getElementById(
+<td>${conductor.nombre}</td>
 
-        "log"
+<td>${conductor.estadoServicio}</td>
 
-    ).textContent =
+<td>${conductor.distancia} m</td>
+
+<td>--</td>
+
+<td>${index+1}</td>
+
+</tr>
+
+`;
+
+}
+
+);
+
+document.getElementById(
+
+"log"
+
+).textContent=
 
 `Conductores registrados: ${conductores.length}
 
 Disponibles: ${buscarConductores(conductores).length}
 
-Dentro del radio (${RADIO_BUSQUEDA} m): ${lista.length}
+Radio utilizado: ${resultado.radio}
 
-✔ Filtro por distancia funcionando correctamente.`;
+Conductores encontrados: ${resultado.conductores.length}
+
+✔ Radio dinámico funcionando correctamente.`;
 
 }
