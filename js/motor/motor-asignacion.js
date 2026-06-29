@@ -8,41 +8,72 @@ import {
 }
 from "./calcular-distancia.js";
 
+import {
+    filtrarRadio
+}
+from "./filtrar-radio.js";
+
+
 const conductores = [
 
     {
+
         nombre:"Carlos",
+
         estadoServicio:"disponible",
+
         latitud:17.409058,
+
         longitud:-93.327280
+
     },
 
     {
+
         nombre:"Juan",
+
         estadoServicio:"en_viaje",
+
         latitud:17.410500,
+
         longitud:-93.329500
+
     },
 
     {
+
         nombre:"Pedro",
+
         estadoServicio:"disponible",
+
         latitud:17.408700,
+
         longitud:-93.327100
+
     },
 
     {
+
         nombre:"Luis",
+
         estadoServicio:"ocupado",
+
         latitud:17.420000,
+
         longitud:-93.330000
+
     },
 
     {
+
         nombre:"Miguel",
+
         estadoServicio:"disponible",
+
         latitud:17.412000,
+
         longitud:-93.331000
+
     }
 
 ];
@@ -55,9 +86,14 @@ const pasajero = {
 
 };
 
+const RADIO_BUSQUEDA = 300;
+
 const boton =
+
 document.getElementById(
+
     "btnProbar"
+
 );
 
 boton.addEventListener(
@@ -70,9 +106,12 @@ boton.addEventListener(
 
 function ejecutarMotor(){
 
-    const disponibles =
+    let disponibles =
+
     buscarConductores(
+
         conductores
+
     );
 
     disponibles.forEach(
@@ -80,14 +119,17 @@ function ejecutarMotor(){
         conductor=>{
 
             conductor.distancia =
+
             Math.round(
 
                 calcularDistancia(
 
                     pasajero.latitud,
+
                     pasajero.longitud,
 
                     conductor.latitud,
+
                     conductor.longitud
 
                 )
@@ -98,8 +140,20 @@ function ejecutarMotor(){
 
     );
 
+    disponibles =
+
+    filtrarRadio(
+
+        disponibles,
+
+        RADIO_BUSQUEDA
+
+    );
+
     mostrarResultado(
+
         disponibles
+
     );
 
 }
@@ -107,8 +161,11 @@ function ejecutarMotor(){
 function mostrarResultado(lista){
 
     const tabla =
+
     document.getElementById(
+
         "tablaConductores"
+
     );
 
     tabla.innerHTML = "";
@@ -140,13 +197,17 @@ function mostrarResultado(lista){
     );
 
     document.getElementById(
+
         "log"
+
     ).textContent =
 
-`Conductores encontrados: ${conductores.length}
+`Conductores registrados: ${conductores.length}
 
-Disponibles: ${lista.length}
+Disponibles: ${buscarConductores(conductores).length}
 
-Distancias calculadas correctamente.`;
+Dentro del radio (${RADIO_BUSQUEDA} m): ${lista.length}
+
+✔ Filtro por distancia funcionando correctamente.`;
 
 }
