@@ -21,6 +21,8 @@ let pasajeroMarker = null;
 
 let conductorMarker = null;
 
+let rutaControl = null;
+
 let movimientoActivo = false;
 
 
@@ -310,6 +312,16 @@ if(!movimientoActivo){
 
                 }
 
+
+
+                dibujarRuta(
+
+               conductorPos,
+
+              pasajeroPos
+
+              );
+
                 const grupo=
 
                 L.featureGroup([
@@ -397,8 +409,161 @@ function escucharMovimientoConductor(conductorId){
 
             );
 
+            dibujarRuta(
+
+                nuevaPos,
+
+                [
+
+                    pasajeroMarker.getLatLng().lat,
+
+                    pasajeroMarker.getLatLng().lng
+
+                ]
+
+            );
+
         }
 
     );
 
 }
+
+
+
+
+
+function dibujarRuta(origen,destino){
+
+    if(!rutaControl){
+
+        rutaControl =
+
+        L.Routing.control({
+
+            waypoints:[
+
+                L.latLng(
+
+                    origen[0],
+
+                    origen[1]
+
+                ),
+
+                L.latLng(
+
+                    destino[0],
+
+                    destino[1]
+
+                )
+
+            ],
+
+            show:false,
+
+            addWaypoints:false,
+
+            draggableWaypoints:false,
+
+            fitSelectedRoutes:false,
+
+            routeWhileDragging:false,
+
+            createMarker:()=>null,
+
+            lineOptions:{
+
+                styles:[{
+
+                    color:"#16a34a",
+
+                    weight:6,
+
+                    opacity:0.9
+
+                }]
+
+            }
+
+        })
+
+        .addTo(map);
+
+        rutaControl.on(
+
+            "routesfound",
+
+            function(e){
+
+                const ruta =
+
+                e.routes[0];
+
+                document.getElementById(
+
+                    "distanceText"
+
+                ).textContent=
+
+                (
+
+                    ruta.summary.totalDistance
+
+                    /1000
+
+                ).toFixed(1)
+
+                +" km";
+
+                document.getElementById(
+
+                    "timeText"
+
+                ).textContent=
+
+                Math.ceil(
+
+                    ruta.summary.totalTime
+
+                    /60
+
+                )+" min";
+
+            }
+
+        );
+
+    }
+
+    else{
+
+        rutaControl.setWaypoints([
+
+            L.latLng(
+
+                origen[0],
+
+                origen[1]
+
+            ),
+
+            L.latLng(
+
+                destino[0],
+
+                destino[1]
+
+            )
+
+        ]);
+
+    }
+
+}
+
+
+
+
+
