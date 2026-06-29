@@ -1,17 +1,59 @@
 export function filtrarRadio(
 
-    conductores,
-
-    radioMaximo
+    conductores
 
 ){
 
-    return conductores.filter(
+    const radios = [
 
-        conductor =>
+        300,
 
-            conductor.distancia <= radioMaximo
+        500,
 
-    );
+        1000,
+
+        2000,
+
+        5000
+
+    ];
+
+    for(const radio of radios){
+
+        const encontrados =
+
+        conductores.filter(
+
+            conductor=>
+
+                conductor.distancia<=radio
+
+        );
+
+        if(
+
+            encontrados.length>=3
+
+        ){
+
+            return{
+
+                radio,
+
+                conductores:encontrados
+
+            };
+
+        }
+
+    }
+
+    return{
+
+        radio:"Sin límite",
+
+        conductores
+
+    };
 
 }
