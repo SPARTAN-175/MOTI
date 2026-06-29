@@ -1,189 +1,152 @@
 import {
-
-calcularDistancia
-
+    buscarConductores
 }
+from "./buscar-conductores.js";
 
+import {
+    calcularDistancia
+}
 from "./calcular-distancia.js";
 
-const conductores=[
+const conductores = [
 
-{
+    {
+        nombre:"Carlos",
+        estadoServicio:"disponible",
+        latitud:17.409058,
+        longitud:-93.327280
+    },
 
-nombre:"Carlos",
+    {
+        nombre:"Juan",
+        estadoServicio:"en_viaje",
+        latitud:17.410500,
+        longitud:-93.329500
+    },
 
-estadoServicio:"disponible",
+    {
+        nombre:"Pedro",
+        estadoServicio:"disponible",
+        latitud:17.408700,
+        longitud:-93.327100
+    },
 
-latitud:17.409058,
+    {
+        nombre:"Luis",
+        estadoServicio:"ocupado",
+        latitud:17.420000,
+        longitud:-93.330000
+    },
 
-longitud:-93.327280
-
-},
-
-{
-
-nombre:"Juan",
-
-estadoServicio:"en_viaje",
-
-latitud:17.410500,
-
-longitud:-93.329500
-
-},
-
-{
-
-nombre:"Pedro",
-
-estadoServicio:"disponible",
-
-latitud:17.408700,
-
-longitud:-93.327100
-
-},
-
-{
-
-nombre:"Luis",
-
-estadoServicio:"ocupado",
-
-latitud:17.420000,
-
-longitud:-93.330000
-
-},
-
-{
-
-nombre:"Miguel",
-
-estadoServicio:"disponible",
-
-latitud:17.412000,
-
-longitud:-93.331000
-
-}
+    {
+        nombre:"Miguel",
+        estadoServicio:"disponible",
+        latitud:17.412000,
+        longitud:-93.331000
+    }
 
 ];
 
-const pasajero={
+const pasajero = {
 
-latitud:17.4088035,
+    latitud:17.4088035,
 
-longitud:-93.327078
+    longitud:-93.327078
 
 };
 
-const boton=
-
+const boton =
 document.getElementById(
-
-"btnProbar"
-
+    "btnProbar"
 );
 
 boton.addEventListener(
 
-"click",
+    "click",
 
-()=>{
-
-const disponibles=
-
-buscarConductores(
-
-conductores
+    ejecutarMotor
 
 );
 
-mostrarResultado(
+function ejecutarMotor(){
 
-disponibles
+    const disponibles =
+    buscarConductores(
+        conductores
+    );
 
-);
+    disponibles.forEach(
+
+        conductor=>{
+
+            conductor.distancia =
+            Math.round(
+
+                calcularDistancia(
+
+                    pasajero.latitud,
+                    pasajero.longitud,
+
+                    conductor.latitud,
+                    conductor.longitud
+
+                )
+
+            );
+
+        }
+
+    );
+
+    mostrarResultado(
+        disponibles
+    );
 
 }
-
-);
 
 function mostrarResultado(lista){
 
-const tabla=
+    const tabla =
+    document.getElementById(
+        "tablaConductores"
+    );
 
-document.getElementById(
+    tabla.innerHTML = "";
 
-"tablaConductores"
+    lista.forEach(
 
-);
+        (conductor,index)=>{
 
-tabla.innerHTML="";
+            tabla.innerHTML += `
 
-lista.forEach(
+            <tr>
 
-conductor=>{
+                <td>${conductor.nombre}</td>
 
-conductor.distancia=
+                <td>${conductor.estadoServicio}</td>
 
-Math.round(
+                <td>${conductor.distancia} m</td>
 
-calcularDistancia(
+                <td>--</td>
 
-pasajero.latitud,
+                <td>${index+1}</td>
 
-pasajero.longitud,
+            </tr>
 
-conductor.latitud,
+            `;
 
-conductor.longitud
+        }
 
-)
+    );
 
-);
-
-});
-  
-  lista.forEach(
-
-(conductor,index)=>{
-
-const fila=`
-
-<tr>
-
-<td>${conductor.nombre}</td>
-
-<td>${conductor.estadoServicio}</td>
-
-<td>${conductor.distancia} m</td>
-
-<td>--</td>
-
-<td>${index+1}</td>
-
-</tr>
-
-`;
-
-tabla.innerHTML+=fila;
-
-}
-
-);
-
-document.getElementById(
-
-"log"
-
-).textContent=
+    document.getElementById(
+        "log"
+    ).textContent =
 
 `Conductores encontrados: ${conductores.length}
 
 Disponibles: ${lista.length}
 
-Primer módulo funcionando correctamente.`;
+Distancias calculadas correctamente.`;
 
 }
