@@ -46,6 +46,17 @@ if(!viajeId){
 
 const estadoViaje =
 
+ document.getElementById(
+    "estadoViaje"
+);
+
+const nombreConductor =
+
+document.getElementById(
+    "nombreConductor"
+);
+
+
 let map = null;
 
 window.addEventListener(
@@ -82,16 +93,9 @@ window.addEventListener(
 
 
 
-    
-document.getElementById(
-    "estadoViaje"
-);
 
-const nombreConductor =
 
-document.getElementById(
-    "nombreConductor"
-);
+
 
 const destinoViaje =
 
