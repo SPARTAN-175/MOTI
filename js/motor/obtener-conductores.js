@@ -51,6 +51,8 @@ export async function obtenerConductores(){
 
     );
 
+
+    console.log(conductores);
     return conductores;
 
 }
