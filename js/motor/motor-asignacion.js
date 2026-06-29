@@ -28,279 +28,235 @@ import {
 }
 from "./seleccionar-grupo.js";
 
-const viaje={
-
-    tipoViaje:"especial",
-
-    destino:"Plan de Ayala"
-
-};
-
-const conductores=[
-
-{
-nombre:"Carlos",
-estadoServicio:"disponible",
-latitud:17.409058,
-longitud:-93.327280,
-minutosSinViaje:35,
-rutasEspeciales:[
-{
-destino:"Plan de Ayala",
-tarifa:120,
-activo:true
-}]
-},
-
-{
-nombre:"Juan",
-estadoServicio:"en_viaje",
-latitud:17.410500,
-longitud:-93.329500,
-minutosSinViaje:5,
-rutasEspeciales:[]
-},
-
-{
-nombre:"Pedro",
-estadoServicio:"disponible",
-latitud:17.408700,
-longitud:-93.327100,
-minutosSinViaje:55,
-rutasEspeciales:[
-{
-destino:"Nuevo Xochimilco",
-tarifa:150,
-activo:true
-}]
-},
-
-{
-nombre:"Miguel",
-estadoServicio:"disponible",
-latitud:17.412000,
-longitud:-93.331000,
-minutosSinViaje:15,
-rutasEspeciales:[
-{
-destino:"Plan de Ayala",
-tarifa:130,
-activo:true
-}]
-},
-
-{
-nombre:"José",
-estadoServicio:"disponible",
-latitud:17.414000,
-longitud:-93.333000,
-minutosSinViaje:45,
-rutasEspeciales:[
-{
-destino:"Plan de Ayala",
-activo:false
-}]
-},
 
-{
-nombre:"Antonio",
-estadoServicio:"disponible",
-latitud:17.413000,
-longitud:-93.330000,
-minutosSinViaje:70,
-rutasEspeciales:[
-{
-destino:"Plan de Ayala",
-activo:true
-}]
-},
+export function ejecutarMotor(
 
-{
-nombre:"Luis",
-estadoServicio:"disponible",
-latitud:17.415000,
-longitud:-93.334000,
-minutosSinViaje:25,
-rutasEspeciales:[
-{
-destino:"Plan de Ayala",
-activo:true
-}]
-}
+    conductores,
 
-];
+    viaje,
 
-const pasajero={
+    pasajero
 
-latitud:17.4088035,
+){
 
-longitud:-93.327078
+    const log=[];
 
-};
+    log.push("🚖 MOTI ENGINE INICIADO");
 
-document
-.getElementById("btnProbar")
-.addEventListener("click",ejecutarMotor);
+    let disponibles=
 
-function ejecutarMotor(){
+    buscarConductores(
 
-let log=[];
+        conductores
 
-log.push("🚖 MOTI ENGINE INICIADO");
+    );
 
-let disponibles=
-buscarConductores(conductores);
+    log.push(
 
-log.push(`✅ Conductores registrados: ${conductores.length}`);
+        `Conductores registrados: ${conductores.length}`
 
-log.push(`✅ Disponibles: ${disponibles.length}`);
+    );
 
-disponibles.forEach(
+    log.push(
 
-conductor=>{
+        `Disponibles: ${disponibles.length}`
 
-conductor.distancia=
+    );
 
-Math.round(
 
-calcularDistancia(
 
-pasajero.latitud,
-pasajero.longitud,
+    disponibles.forEach(
 
-conductor.latitud,
-conductor.longitud
+        conductor=>{
 
-)
+            conductor.distancia=
 
-);
+            Math.round(
 
-}
+                calcularDistancia(
 
-);
+                    pasajero.latitud,
 
-log.push("✅ Distancias calculadas.");
+                    pasajero.longitud,
 
-const radio=
+                    conductor.latitud,
 
-filtrarRadio(disponibles);
+                    conductor.longitud
 
-log.push(`✅ Radio dinámico aplicado: ${radio.radio}`);
+                )
 
-log.push(`✅ Conductores cercanos: ${radio.conductores.length}`);
+            );
 
-const especiales=
+        }
 
-filtrarRutasEspeciales(
+    );
 
-radio.conductores,
 
-viaje
 
-);
+    log.push(
 
-if(viaje.tipoViaje==="especial"){
+        "Distancias calculadas."
 
-log.push("✅ Viaje especial detectado.");
+    );
 
-log.push(`✅ Compatibles con la ruta: ${especiales.length}`);
 
-}
 
-const puntuados=
+    const resultadoRadio=
 
-calcularPuntaje(especiales);
+    filtrarRadio(
 
-log.push("✅ Puntajes calculados.");
+        disponibles
 
-puntuados.sort(
+    );
 
-(a,b)=>b.puntaje-a.puntaje
 
-);
 
-log.push("✅ Conductores ordenados.");
+    log.push(
 
-const grupos=
+        `Radio utilizado: ${resultadoRadio.radio}`
 
-seleccionarGrupos(
+    );
 
-puntuados
 
-);
 
-log.push(`✅ Grupos creados: ${grupos.length}`);
+    let candidatos=
 
-log.push("🏁 MOTOR FINALIZADO.");
+    resultadoRadio.conductores;
 
-mostrarResultado(
 
-grupos,
 
-log
+    if(
 
-);
+        viaje.tipoViaje==="especial"
 
-}
+    ){
 
-function mostrarResultado(grupos,log){
+        candidatos=
 
-const tabla=
+        filtrarRutasEspeciales(
 
-document.getElementById("tablaConductores");
+            candidatos,
 
-tabla.innerHTML="";
+            viaje
 
-grupos.forEach(
+        );
 
-(grupo,numeroGrupo)=>{
 
-grupo.forEach(
 
-(conductor,index)=>{
+        log.push(
 
-tabla.innerHTML+=`
+            `Conductores compatibles: ${candidatos.length}`
 
-<tr>
+        );
 
-<td>
+    }
 
-Grupo ${numeroGrupo+1}
 
-<br>
 
-<strong>${conductor.nombre}</strong>
+    candidatos=
 
-</td>
+    calcularPuntaje(
 
-<td>${conductor.estadoServicio}</td>
+        candidatos
 
-<td>${conductor.distancia} m</td>
+    );
 
-<td>${conductor.puntaje}</td>
 
-<td>${index+1}</td>
 
-</tr>
+    log.push(
 
-`;
+        "Puntajes calculados."
 
-}
+    );
 
-);
 
-}
 
-);
+    candidatos.sort(
 
-document.getElementById(
+        (a,b)=>
 
-"log"
+        b.puntaje-a.puntaje
 
-).textContent=
+    );
 
-log.join("\n");
 
-console.log(grupos);
+
+    log.push(
+
+        "Conductores ordenados."
+
+    );
+
+
+
+    const grupos=
+
+    seleccionarGrupos(
+
+        candidatos
+
+    );
+
+
+
+    log.push(
+
+        `Grupos creados: ${grupos.length}`
+
+    );
+
+
+
+    log.push(
+
+        "🏁 MOTOR FINALIZADO"
+
+    );
+
+
+
+    return{
+
+        grupos,
+
+
+
+        log,
+
+
+
+        estadisticas:{
+
+            registrados:
+
+            conductores.length,
+
+
+
+            disponibles:
+
+            disponibles.length,
+
+
+
+            radio:
+
+            resultadoRadio.radio,
+
+
+
+            candidatos:
+
+            candidatos.length,
+
+
+
+            grupos:
+
+            grupos.length
+
+        }
+
+    };
 
 }
