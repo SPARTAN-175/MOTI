@@ -124,6 +124,30 @@ tabla.innerHTML="";
 
 lista.forEach(
 
+conductor=>{
+
+conductor.distancia=
+
+Math.round(
+
+calcularDistancia(
+
+pasajero.latitud,
+
+pasajero.longitud,
+
+conductor.latitud,
+
+conductor.longitud
+
+)
+
+);
+
+});
+  
+  lista.forEach(
+
 (conductor,index)=>{
 
 const fila=`
@@ -134,7 +158,7 @@ const fila=`
 
 <td>${conductor.estadoServicio}</td>
 
-<td>--</td>
+<td>${conductor.distancia} m</td>
 
 <td>--</td>
 
