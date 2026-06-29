@@ -5,6 +5,10 @@ import {
 
     collection,
 
+    query,
+
+    where,
+
     getDocs
 
 }
@@ -13,15 +17,19 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 export async function obtenerConductores(){
 
+    const consulta = query(
+
+        collection(db,"usuarios"),
+
+        where("tipo","==","conductor"),
+
+        where("estadoServicio","==","disponible")
+
+    );
+
     const snapshot = await getDocs(
 
-        collection(
-
-            db,
-
-            "usuarios"
-
-        )
+        consulta
 
     );
 
@@ -29,29 +37,15 @@ export async function obtenerConductores(){
 
     snapshot.forEach(
 
-        (doc)=>{
+        doc=>{
 
-            const usuario = doc.data();
+            conductores.push({
 
-            if(
+                id:doc.id,
 
-                usuario.tipo === "conductor"
+                ...doc.data()
 
-                &&
-
-                usuario.estadoServicio === "disponible"
-
-            ){
-
-                conductores.push({
-
-                    id: doc.id,
-
-                    ...usuario
-
-                });
-
-            }
+            });
 
         }
 
