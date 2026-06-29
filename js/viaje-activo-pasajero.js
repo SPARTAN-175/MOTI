@@ -21,6 +21,8 @@ let pasajeroMarker = null;
 
 let conductorMarker = null;
 
+let movimientoActivo = false;
+
 
 // ========================================
 // ICONOS
@@ -238,6 +240,32 @@ onSnapshot(
 
                 conductor.nombre;
 
+
+// =========================
+// INICIAR MOVIMIENTO
+// =========================
+
+if(!movimientoActivo){
+
+    escucharMovimientoConductor(
+
+        viaje.conductorId
+
+    );
+
+    movimientoActivo = true;
+
+}
+
+
+
+
+
+
+
+
+                
+
                 const conductorPos=[
 
                     conductor.latitud,
@@ -311,3 +339,66 @@ onSnapshot(
     }
 
 );
+
+
+// ========================================
+// ESCUCHAR MOVIMIENTO DEL CONDUCTOR
+// ========================================
+
+function escucharMovimientoConductor(conductorId){
+
+    onSnapshot(
+
+        doc(
+
+            db,
+
+            "usuarios",
+
+            conductorId
+
+        ),
+
+        (docSnap)=>{
+
+            if(!docSnap.exists()) return;
+
+            const conductor =
+
+            docSnap.data();
+
+            if(!conductorMarker) return;
+
+            const nuevaPos=[
+
+                conductor.latitud,
+
+                conductor.longitud
+
+            ];
+
+            conductorMarker.setLatLng(
+
+                nuevaPos
+
+            );
+
+            map.panTo(
+
+                nuevaPos,
+
+                {
+
+                    animate:true,
+
+                    duration:0.7
+
+                }
+
+            );
+
+        }
+
+    );
+
+}
