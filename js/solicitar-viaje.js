@@ -77,52 +77,51 @@ userDoc.data();
             :
             "local";
 
-            await addDoc(
+            const solicitudRef = await addDoc(
 
-                collection(
-                    db,
-                    "solicitudes"
-                ),
+    collection(
+        db,
+        "solicitudes"
+    ),
 
-                {
+    {
 
-                    pasajeroId:
-                    user.uid,
+        pasajeroId:
+        user.uid,
 
-                    nombrePasajero:
-                    userData.nombre,
+        nombrePasajero:
+        userData.nombre,
 
-                    tipoViaje,
+        tipoViaje,
 
-                    destino:
-tipoViaje ===
-"especial"
-?
-destinoEspecial.value
-:
-destino.value.trim(),
+        destino:
+        tipoViaje === "especial"
+        ?
+        destinoEspecial.value
+        :
+        destino.value.trim(),
 
-                    observaciones:
-observaciones.value.trim(),
+        observaciones:
+        observaciones.value.trim(),
 
-latitud:
-userData.latitud,
+        latitud:
+        userData.latitud,
 
-longitud:
-userData.longitud,
+        longitud:
+        userData.longitud,
 
-estado:
-"pendiente",
-                    fecha:
-                    serverTimestamp()
+        estado:
+        "pendiente",
 
-                }
+        fecha:
+        serverTimestamp()
 
-            );
+    }
 
-            alert(
-                "Solicitud enviada correctamente."
-            );
+);
+
+window.location.href =
+`esperando-conductor.html?id=${solicitudRef.id}`;
 
         }
         catch(error){
