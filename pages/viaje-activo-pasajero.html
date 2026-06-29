@@ -26,6 +26,14 @@ href="../css/main.css">
 
 <link
 rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
+  
+<link
+rel="stylesheet"
 href="../css/viaje-activo-pasajero.css">
 
 </head>
@@ -90,6 +98,59 @@ Destino
 
 </strong>
 
+<div class="map-card">
+
+    <div class="navigation-card">
+
+        <div class="navigation-title">
+
+            Ubicación del conductor
+
+        </div>
+
+        <div class="navigation-info">
+
+            <div>
+
+                <span class="label">
+
+                    Distancia
+
+                </span>
+
+                <strong id="distanceText">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span class="label">
+
+                    Tiempo
+
+                </span>
+
+                <strong id="timeText">
+
+                    --
+
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="map"></div>
+
+</div>
+
+  
 </p>
 
 <p id="destinoViaje">
@@ -108,6 +169,20 @@ src="../js/viaje-activo-pasajero.js">
 
 </script>
 
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script
+src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js">
+</script>
+
+<script
+type="module"
+src="../js/viaje-activo-pasajero.js">
+</script>
+
+  
 </body>
 
 </html>
