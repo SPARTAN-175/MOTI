@@ -1,4 +1,9 @@
 import {
+    ejecutarMotor
+}
+from "../motor/motor-asignacion.js";
+
+import {
 
     obtenerConductores
 
