@@ -1,63 +1,166 @@
-import { buscarConductores }
+import {
+    buscarConductores
+}
 from "./buscar-conductores.js";
 
-import { calcularDistancia }
+import {
+    calcularDistancia
+}
 from "./calcular-distancia.js";
 
-import { filtrarRadio }
+import {
+    filtrarRadio
+}
 from "./filtrar-radio.js";
 
-import { calcularPuntaje }
+import {
+    calcularPuntaje
+}
 from "./calcular-puntaje.js";
+
+import {
+    filtrarRutasEspeciales
+}
+from "./filtrar-rutas-especiales.js";
+
+
+const viaje={
+
+    tipoViaje:"especial",
+
+    destino:"Plan de Ayala"
+
+};
+
 
 const conductores=[
 
 {
+
 nombre:"Carlos",
+
 estadoServicio:"disponible",
+
 latitud:17.409058,
+
 longitud:-93.327280,
-minutosSinViaje:35
+
+minutosSinViaje:35,
+
+rutasEspeciales:[
+
+{
+
+destino:"Plan de Ayala",
+
+tarifa:120,
+
+activo:true
+
+}
+
+]
+
 },
 
 {
+
 nombre:"Juan",
+
 estadoServicio:"en_viaje",
+
 latitud:17.410500,
+
 longitud:-93.329500,
-minutosSinViaje:5
+
+minutosSinViaje:5,
+
+rutasEspeciales:[]
+
 },
 
 {
+
 nombre:"Pedro",
+
 estadoServicio:"disponible",
+
 latitud:17.408700,
+
 longitud:-93.327100,
-minutosSinViaje:55
+
+minutosSinViaje:55,
+
+rutasEspeciales:[
+
+{
+
+destino:"Nuevo Xochimilco",
+
+tarifa:150,
+
+activo:true
+
+}
+
+]
+
 },
 
 {
-nombre:"Luis",
-estadoServicio:"ocupado",
-latitud:17.420000,
-longitud:-93.330000,
-minutosSinViaje:60
-},
 
-{
 nombre:"Miguel",
+
 estadoServicio:"disponible",
+
 latitud:17.412000,
+
 longitud:-93.331000,
-minutosSinViaje:15
+
+minutosSinViaje:15,
+
+rutasEspeciales:[
+
+{
+
+destino:"Plan de Ayala",
+
+tarifa:130,
+
+activo:true
+
+}
+
+]
+
 },
 
 {
+
 nombre:"José",
+
 estadoServicio:"disponible",
+
 latitud:17.414000,
+
 longitud:-93.333000,
-minutosSinViaje:45
+
+minutosSinViaje:45,
+
+rutasEspeciales:[
+
+{
+
+destino:"Plan de Ayala",
+
+tarifa:120,
+
+activo:false
+
+}
+
+]
+
 }
 
 ];
@@ -72,7 +175,11 @@ longitud:-93.327078
 
 document
 
-.getElementById("btnProbar")
+.getElementById(
+
+"btnProbar"
+
+)
 
 .addEventListener(
 
@@ -86,7 +193,11 @@ function ejecutarMotor(){
 
 let disponibles=
 
-buscarConductores(conductores);
+buscarConductores(
+
+conductores
+
+);
 
 disponibles.forEach(
 
@@ -114,15 +225,29 @@ conductor.longitud
 
 );
 
-let resultado=
+let radio=
 
-filtrarRadio(disponibles);
+filtrarRadio(
+
+disponibles
+
+);
+
+let especiales=
+
+filtrarRutasEspeciales(
+
+radio.conductores,
+
+viaje
+
+);
 
 let puntuados=
 
 calcularPuntaje(
 
-resultado.conductores
+especiales
 
 );
 
@@ -138,7 +263,7 @@ mostrarResultado(
 
 puntuados,
 
-resultado.radio
+radio.radio
 
 );
 
@@ -148,7 +273,11 @@ function mostrarResultado(lista,radio){
 
 const tabla=
 
-document.getElementById("tablaConductores");
+document.getElementById(
+
+"tablaConductores"
+
+);
 
 tabla.innerHTML="";
 
@@ -184,14 +313,14 @@ document.getElementById(
 
 ).textContent=
 
-`Conductores registrados: ${conductores.length}
+`Tipo de viaje: ${viaje.tipoViaje}
 
-Disponibles: ${buscarConductores(conductores).length}
+Destino: ${viaje.destino}
 
 Radio utilizado: ${radio}
 
-Conductores candidatos: ${lista.length}
+Conductores compatibles: ${lista.length}
 
-✔ Puntajes calculados correctamente.`;
+✔ Filtro de rutas especiales funcionando correctamente.`;
 
 }
