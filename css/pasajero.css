@@ -265,3 +265,49 @@
 
     font-size:24px;
 }
+
+
+
+.lista-destinos{
+
+    margin-top:10px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    background:#fff;
+
+    overflow:hidden;
+
+    display:none;
+
+    max-height:220px;
+
+    overflow-y:auto;
+
+}
+
+.item-destino{
+
+    padding:12px;
+
+    cursor:pointer;
+
+    border-bottom:1px solid #eee;
+
+    transition:.2s;
+
+}
+
+.item-destino:hover{
+
+    background:#f5f5f5;
+
+}
+
+.item-destino:last-child{
+
+    border-bottom:none;
+
+}
