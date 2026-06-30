@@ -2,13 +2,22 @@ import { auth, db }
 from "./firebase-config.js";
 
 import {
-    collection,
-    getDocs
+
+collection,
+getDocs,
+doc,
+getDoc,
+setDoc,
+addDoc,
+serverTimestamp
+
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 import {
-    onAuthStateChanged
+
+onAuthStateChanged
+
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
@@ -22,6 +31,8 @@ let map = null;
 let marcador = null;
 
 let destinoSeleccionado = null;
+
+let usuarioActual = null;
 
 
 // ================================
@@ -76,6 +87,8 @@ location.href="../index.html";
 return;
 
 }
+
+usuarioActual=user;
 
 });
 
@@ -345,7 +358,291 @@ function iniciarMapa(){
 
 }
 
+// ========================================
+// GUARDAR RUTA
+// ========================================
 
+document
+
+.getElementById(
+
+"btnGuardar"
+
+)
+
+.addEventListener(
+
+"click",
+
+guardarRuta
+
+);
+
+
+async function guardarRuta(){
+
+try{
+
+if(!usuarioActual){
+
+alert(
+
+"No hay sesión."
+
+);
+
+return;
+
+}
+
+
+if(!destinoSeleccionado){
+
+alert(
+
+"Selecciona un destino."
+
+);
+
+return;
+
+}
+
+
+if(
+
+tarifa.value.trim()===""
+
+){
+
+alert(
+
+"Escribe una tarifa."
+
+);
+
+return;
+
+}
+
+
+let destinoId=null;
+
+
+// =============================
+// DESTINO NUEVO
+// =============================
+
+if(
+
+!destinoSeleccionado.id
+
+){
+
+destinoId=
+
+txtNombre.value
+
+.trim()
+
+.toLowerCase()
+
+.normalize("NFD")
+
+.replace(/[\u0300-\u036f]/g,"")
+
+.replace(/\s+/g,"_");
+
+
+await setDoc(
+
+doc(
+
+db,
+
+"destinos",
+
+destinoId
+
+),
+
+{
+
+nombre:
+
+txtNombre.value.trim(),
+
+municipio:
+
+"Ostuacán",
+
+estado:
+
+"Chiapas",
+
+latitud:
+
+destinoSeleccionado.latitud,
+
+longitud:
+
+destinoSeleccionado.longitud,
+
+tipo:
+
+"comunitario",
+
+activo:true,
+
+fechaCreacion:
+
+serverTimestamp()
+
+}
+
+);
+
+}
+
+else{
+
+destinoId=
+
+destinoSeleccionado.id;
+
+}
+
+
+// =============================
+// EVITAR DUPLICADOS
+// =============================
+
+const consulta=
+
+await getDocs(
+
+collection(
+
+db,
+
+"rutasEspeciales"
+
+)
+
+);
+
+let existe=false;
+
+consulta.forEach(doc=>{
+
+const ruta=
+
+doc.data();
+
+if(
+
+ruta.conductorId===
+
+usuarioActual.uid
+
+&&
+
+ruta.destinoId===
+
+destinoId
+
+&&
+
+ruta.activo===true
+
+){
+
+existe=true;
+
+}
+
+});
+
+if(existe){
+
+alert(
+
+"Ya tienes registrada esta ruta."
+
+);
+
+return;
+
+}
+
+
+// =============================
+// GUARDAR RUTA
+// =============================
+
+await addDoc(
+
+collection(
+
+db,
+
+"rutasEspeciales"
+
+),
+
+{
+
+conductorId:
+
+usuarioActual.uid,
+
+destinoId:
+
+destinoId,
+
+tarifa:
+
+Number(
+
+tarifa.value
+
+),
+
+activo:true,
+
+fechaCreacion:
+
+serverTimestamp()
+
+}
+
+);
+
+alert(
+
+"Ruta guardada correctamente."
+
+);
+
+window.location.href=
+
+"rutas-tarifas.html";
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+
+"Error al guardar."
+
+);
+
+}
+
+}
 
 
 
