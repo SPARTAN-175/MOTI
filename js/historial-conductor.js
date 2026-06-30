@@ -8,7 +8,8 @@ query,
 where,
 getDocs,
 doc,
-getDoc
+getDoc,
+orderBy
 
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -52,26 +53,22 @@ async function cargarHistorial(uid){
 
 lista.innerHTML="";
 
-const consulta=
-
-query(
+const consulta = query(
 
 collection(
-
 db,
-
 "solicitudes"
-
 ),
 
 where(
-
 "conductorId",
-
 "==",
-
 uid
+),
 
+orderBy(
+"fechaFinalizacion",
+"desc"
 )
 
 );
