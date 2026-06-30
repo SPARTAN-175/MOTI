@@ -8,8 +8,8 @@ query,
 where,
 getDocs,
 doc,
-getDoc
-
+getDoc,
+deleteDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -150,3 +150,121 @@ ruta
 }
 
 }
+
+
+// ========================================
+// CREAR TARJETA
+// ========================================
+
+function crearTarjeta(idRuta,destino,ruta){
+
+const tarjeta =
+
+document.createElement("div");
+
+tarjeta.className="route-card";
+
+tarjeta.innerHTML=`
+
+<h3>
+
+${destino.nombre}
+
+</h3>
+
+<p>
+
+Tarifa: $${ruta.tarifa}
+
+</p>
+
+<div class="card-actions">
+
+<button
+
+class="edit-btn"
+
+data-id="${idRuta}">
+
+Editar
+
+</button>
+
+<button
+
+class="delete-btn"
+
+data-id="${idRuta}">
+
+Eliminar
+
+</button>
+
+</div>
+
+`;
+
+lista.appendChild(
+
+tarjeta
+
+);
+
+}
+
+// ========================================
+// ELIMINAR RUTA
+// ========================================
+
+document.addEventListener(
+
+"click",
+
+async(e)=>{
+
+if(
+
+e.target.classList.contains(
+
+"delete-btn"
+
+)
+
+){
+
+const id=
+
+e.target.dataset.id;
+
+const confirmar=
+
+confirm(
+
+"¿Eliminar esta ruta?"
+
+);
+
+if(!confirmar)return;
+
+await deleteDoc(
+
+doc(
+
+db,
+
+"rutasEspeciales",
+
+id
+
+)
+
+);
+
+location.reload();
+
+}
+
+});
+
+
+
