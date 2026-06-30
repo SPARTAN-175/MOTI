@@ -4,6 +4,9 @@ from "../firebase-config.js";
 import {
 
     collection,
+    query,
+    where,
+    getDocs,
     addDoc,
     serverTimestamp
 
@@ -14,6 +17,60 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 export async function guardarDestino(destino){
 
     try{
+
+        // ===========================
+        // ¿YA EXISTE?
+        // ===========================
+
+        const consulta = query(
+
+            collection(
+
+                db,
+
+                "destinosEspeciales"
+
+            ),
+
+            where(
+
+                "nombre",
+
+                "==",
+
+                destino.nombre
+
+            )
+
+        );
+
+        const resultado =
+
+        await getDocs(
+
+            consulta
+
+        );
+
+        if(!resultado.empty){
+
+            const existente =
+
+            resultado.docs[0];
+
+            return{
+
+                id:existente.id,
+
+                ...existente.data()
+
+            };
+
+        }
+
+        // ===========================
+        // CREAR NUEVO
+        // ===========================
 
         const docRef =
 
@@ -29,17 +86,11 @@ export async function guardarDestino(destino){
 
             {
 
-                nombre:
+                nombre:destino.nombre,
 
-                destino.nombre,
+                latitud:destino.latitud,
 
-                latitud:
-
-                destino.latitud,
-
-                longitud:
-
-                destino.longitud,
+                longitud:destino.longitud,
 
                 activo:true,
 
