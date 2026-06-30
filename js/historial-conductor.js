@@ -109,3 +109,78 @@ viaje
 }
 
 }
+
+
+// ========================================
+// CREAR TARJETA
+// ========================================
+
+function crearTarjeta(viaje){
+
+const tarjeta =
+
+document.createElement("div");
+
+tarjeta.className = "route-card";
+
+let fecha = "-";
+
+if(viaje.fechaFinalizacion){
+
+fecha =
+
+viaje.fechaFinalizacion
+
+.toDate()
+
+.toLocaleString(
+
+"es-MX"
+
+);
+
+}
+
+tarjeta.innerHTML = `
+
+<h3>
+
+${viaje.destino}
+
+</h3>
+
+<p>
+
+👤 ${viaje.nombrePasajero}
+
+</p>
+
+<p>
+
+Estado:
+
+<b>
+
+${viaje.estado}
+
+</b>
+
+</p>
+
+<p>
+
+📅 ${fecha}
+
+</p>
+
+`;
+
+lista.appendChild(
+
+tarjeta
+
+);
+
+}
+
+
