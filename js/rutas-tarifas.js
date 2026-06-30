@@ -9,7 +9,8 @@ where,
 getDocs,
 doc,
 getDoc,
-deleteDoc
+deleteDoc,
+updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -260,11 +261,103 @@ id
 
 );
 
-location.reload();
+await cargarRutas(
+
+auth.currentUser.uid
+
+);
 
 }
 
 });
 
 
+// ========================================
+// EDITAR TARIFA
+// ========================================
 
+document.addEventListener(
+
+"click",
+
+async(e)=>{
+
+if(
+
+!e.target.classList.contains(
+
+"edit-btn"
+
+)
+
+)return;
+
+const id=
+
+e.target.dataset.id;
+
+const nuevaTarifa=
+
+prompt(
+
+"Escribe la nueva tarifa"
+
+);
+
+if(
+
+nuevaTarifa===null
+
+)return;
+
+if(
+
+isNaN(nuevaTarifa)
+
+||
+
+Number(nuevaTarifa)<=0
+
+){
+
+alert(
+
+"Tarifa inválida."
+
+);
+
+return;
+
+}
+
+await updateDoc(
+
+doc(
+
+db,
+
+"rutasEspeciales",
+
+id
+
+),
+
+{
+
+tarifa:Number(
+
+nuevaTarifa
+
+)
+
+}
+
+);
+
+await cargarRutas(
+
+auth.currentUser.uid
+
+);
+
+});
