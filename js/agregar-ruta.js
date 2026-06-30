@@ -53,6 +53,11 @@ document.getElementById(
 "nombreDestino"
 );
 
+const tarifa =
+document.getElementById(
+"tarifa"
+);
+
 
 // ================================
 // VERIFICAR SESIÓN
@@ -224,3 +229,125 @@ destino
 );
 
 }
+
+// ========================================
+// REGISTRAR NUEVO DESTINO
+// ========================================
+
+btnNuevo.addEventListener(
+
+"click",
+
+()=>{
+
+    panelNuevo.style.display="block";
+
+    btnNuevo.style.display="none";
+
+    txtNombre.value=
+
+    txtBuscar.value;
+
+    iniciarMapa();
+
+}
+
+);
+
+
+// ========================================
+// MAPA
+// ========================================
+
+function iniciarMapa(){
+
+    if(map){
+
+        return;
+
+    }
+
+    map =
+
+    L.map("map")
+
+    .setView(
+
+        [17.4088035,-93.327078],
+
+        13
+
+    );
+
+    L.tileLayer(
+
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+        {
+
+            attribution:"© OpenStreetMap"
+
+        }
+
+    ).addTo(map);
+
+    map.on(
+
+        "click",
+
+        function(e){
+
+            if(marcador){
+
+                map.removeLayer(
+
+                    marcador
+
+                );
+
+            }
+
+            marcador =
+
+            L.marker(
+
+                e.latlng
+
+            )
+
+            .addTo(map);
+
+            destinoSeleccionado={
+
+                nombre:
+
+                txtNombre.value,
+
+                latitud:
+
+                e.latlng.lat,
+
+                longitud:
+
+                e.latlng.lng
+
+            };
+
+            console.log(
+
+                destinoSeleccionado
+
+            );
+
+        }
+
+    );
+
+}
+
+
+
+
+
+
+
