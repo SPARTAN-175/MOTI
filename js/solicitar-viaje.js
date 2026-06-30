@@ -9,6 +9,14 @@ import {
     getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+import {
+
+    buscarDestino
+
+}
+from "./destinos/buscar-destino.js";
+
 const btnSolicitar =
 document.getElementById(
     "btnSolicitar"
@@ -19,10 +27,23 @@ document.getElementById(
     "observaciones"
 );
 
-const destinoEspecial =
+const buscarDestinoEspecial =
+
 document.getElementById(
-    "destinoEspecial"
+
+    "buscarDestinoEspecial"
+
 );
+
+const listaDestinos =
+
+document.getElementById(
+
+    "listaDestinos"
+
+);
+
+let destinoSeleccionado = null;
 
 const destino =
 document.getElementById(
@@ -32,6 +53,110 @@ document.getElementById(
 const btnEspecial =
 document.getElementById(
     "btnEspecial"
+);
+
+
+
+// ========================================
+// BUSCAR DESTINOS ESPECIALES
+// ========================================
+
+buscarDestinoEspecial.addEventListener(
+
+    "input",
+
+    async()=>{
+
+        const texto =
+
+        buscarDestinoEspecial.value.trim();
+
+        if(texto.length < 3){
+
+            listaDestinos.style.display =
+
+            "none";
+
+            listaDestinos.innerHTML = "";
+
+            return;
+
+        }
+
+        const resultados =
+
+        await buscarDestino(texto);
+
+        listaDestinos.innerHTML = "";
+
+        resultados.forEach(
+
+            destino=>{
+
+                const item =
+
+                document.createElement("div");
+
+                item.className =
+
+                "item-destino";
+
+                item.innerHTML =
+
+                `📍 ${destino.nombre}`;
+
+                item.addEventListener(
+
+                    "click",
+
+                    ()=>{
+
+                        destinoSeleccionado = destino;
+
+                        buscarDestinoEspecial.value =
+
+                        destino.nombre;
+
+                        listaDestinos.innerHTML = "";
+
+                        listaDestinos.style.display =
+
+                        "none";
+
+                        console.log(
+
+                            destinoSeleccionado
+
+                        );
+
+                    }
+
+                );
+
+                listaDestinos.appendChild(
+
+                    item
+
+                );
+
+            }
+
+        );
+
+        listaDestinos.style.display =
+
+        resultados.length
+
+        ?
+
+        "block"
+
+        :
+
+        "none";
+
+    }
+
 );
 
 
