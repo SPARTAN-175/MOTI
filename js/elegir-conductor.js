@@ -345,11 +345,6 @@ alert(error.message);
 
 }
 
-window.location.href =
-
-`esperando-conductor.html?id=${solicitudRef.id}`;
-
-}
 
 
 
