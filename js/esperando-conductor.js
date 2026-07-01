@@ -67,20 +67,13 @@ solicitudRef,
 
     );
 
-    // ======================
+  // ======================
 // VIAJE ACEPTADO
 // ======================
 
-if(
-
-    solicitud.estado ===
-
-    "aceptada"
-
-){
+if(solicitud.estado === "aceptada"){
 
     window.location.href =
-
     `viaje-activo-pasajero.html?id=${solicitudId}`;
 
     return;
@@ -91,23 +84,30 @@ if(
 // VIAJE RECHAZADO
 // ======================
 
-if(
+if(solicitud.estado === "rechazada"){
 
-    solicitud.estado ===
+    if(solicitud.tipoViaje === "especial"){
 
-    "rechazada"
+        alert(
+            "El conductor rechazó la solicitud. Selecciona otro conductor."
+        );
 
-){
+        window.location.href =
+        `elegir-conductor.html?destinoId=${solicitud.destinoId}&nombre=${encodeURIComponent(solicitud.destino)}`;
 
-    alert(
+    }
 
-        "El conductor rechazó la solicitud. Selecciona otro conductor."
+    else{
 
-    );
+        // FUTURO:
+        // El algoritmo MOTI asignará automáticamente
+        // el siguiente conductor disponible.
 
-    window.location.href =
+        alert(
+            "Buscando otro conductor disponible..."
+        );
 
-    `elegir-conductor.html?destinoId=${solicitud.destinoId}&nombre=${encodeURIComponent(solicitud.destino)}`;
+    }
 
     return;
 
