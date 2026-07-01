@@ -201,6 +201,29 @@ userDoc.data();
             "especial"
             :
             "local";
+// ========================================
+// VIAJE ESPECIAL
+// ========================================
+
+if(tipoViaje==="especial"){
+
+    if(!destinoSeleccionado){
+
+        alert(
+            "Selecciona un destino de la lista."
+        );
+
+        return;
+
+    }
+
+    window.location.href=
+
+`elegir-conductor.html?destinoId=${destinoSeleccionado.id}&nombre=${encodeURIComponent(destinoSeleccionado.nombre)}`;
+
+    return;
+
+}
 
             const solicitudRef = await addDoc(
 
