@@ -298,12 +298,14 @@ orderBy(
 limit(1)
 
 );
+    console.log("UID del conductor:", uid);
 
     onSnapshot(
 
         q,
 
         (snapshot)=>{
+            console.log("Documentos encontrados:", snapshot.size);
 
             if(snapshot.empty){
 
