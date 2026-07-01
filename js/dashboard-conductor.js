@@ -250,12 +250,12 @@ function actualizarVista(){
 // ======================
 
 function escucharSolicitudes(){
-
-    const uid =
+   
+   const uid =
 
 auth.currentUser.uid;
-    
-   const q =
+
+const q =
 
 query(
 
