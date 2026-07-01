@@ -162,6 +162,26 @@ onSnapshot(
 
         viaje.destino;
 
+
+// =========================
+// VIAJE FINALIZADO
+// =========================
+
+if(viaje.estado === "finalizada"){
+
+    alert(
+        "¡Gracias por usar MOTI! Tu viaje ha finalizado."
+    );
+
+    window.location.href =
+    "dashboard-pasajero.html";
+
+    return;
+
+}
+
+        
+
         // =========================
         // PASAJERO
         // =========================
