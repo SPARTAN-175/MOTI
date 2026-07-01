@@ -67,19 +67,51 @@ solicitudRef,
 
     );
 
-    if(
+    // ======================
+// VIAJE ACEPTADO
+// ======================
 
-        solicitud.estado ===
+if(
 
-        "aceptada"
+    solicitud.estado ===
 
-    ){
+    "aceptada"
 
-        window.location.href=
+){
 
-        `viaje-activo-pasajero.html?id=${solicitudId}`;
+    window.location.href =
 
-    }
+    `viaje-activo-pasajero.html?id=${solicitudId}`;
+
+    return;
+
+}
+
+// ======================
+// VIAJE RECHAZADO
+// ======================
+
+if(
+
+    solicitud.estado ===
+
+    "rechazada"
+
+){
+
+    alert(
+
+        "El conductor rechazó la solicitud. Selecciona otro conductor."
+
+    );
+
+    window.location.href =
+
+    `elegir-conductor.html?destinoId=${solicitud.destinoId}&nombre=${encodeURIComponent(solicitud.destino)}`;
+
+    return;
+
+}
 
 }
 
