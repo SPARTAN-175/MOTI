@@ -233,10 +233,66 @@ tarjeta
 
 );
 
+const boton =
+
+tarjeta.querySelector(
+
+".elegir-btn"
+
+);
+
+if(boton){
+
+boton.addEventListener(
+
+"click",
+
+()=>{
+
+seleccionarConductor(
+
+ruta,
+
+conductor
+
+);
+
+}
+
+);
+
+}
+
 }
 
 
+function seleccionarConductor(
 
+ruta,
+
+conductor
+
+){
+
+console.log(
+
+"Conductor seleccionado"
+
+);
+
+console.log(
+
+ruta
+
+);
+
+console.log(
+
+conductor
+
+);
+
+}
 
 
 
