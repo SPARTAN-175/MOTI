@@ -6,7 +6,9 @@ import {
 collection,
 query,
 where,
-onSnapshot
+onSnapshot,
+doc,
+getDoc
 
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -81,16 +83,134 @@ consulta,
 
 lista.innerHTML="";
 
-snapshot.forEach(doc=>{
+for(const rutaDoc of snapshot.docs){
 
-console.log(doc.data());
+const ruta =
+
+rutaDoc.data();
+
+const conductorDoc =
+
+await getDoc(
+
+doc(
+
+db,
+
+"usuarios",
+
+ruta.conductorId
+
+)
+
+);
+
+if(!conductorDoc.exists()){
+
+continue;
+
+}
+
+const conductor =
+
+conductorDoc.data();
+
+crearTarjeta(
+
+ruta,
+
+conductor
+
+);
+
+}
 
 });
 
-});
 
+// ========================================
+// CREAR TARJETA
+// ========================================
 
+function crearTarjeta(
 
+ruta,
+
+conductor
+
+){
+
+const tarjeta =
+
+document.createElement(
+
+"div"
+
+);
+
+tarjeta.className=
+
+"route-card";
+
+const estado =
+
+conductor.estadoServicio ===
+
+"disponible"
+
+?
+
+"🟢 Disponible"
+
+:
+
+"🟡 Ocupado";
+
+tarjeta.innerHTML =
+
+`
+
+<h3>
+
+${conductor.nombre}
+
+</h3>
+
+<p>
+
+${estado}
+
+</p>
+
+<p>
+
+Tarifa: $${ruta.tarifa}
+
+</p>
+
+<button
+
+class="btn-primary elegir-btn"
+
+data-conductor="${ruta.conductorId}"
+
+data-ruta="${ruta.destinoId}"
+
+data-tarifa="${ruta.tarifa}">
+
+Elegir
+
+</button>
+
+`;
+
+lista.appendChild(
+
+tarjeta
+
+);
+
+}
 
 
 
