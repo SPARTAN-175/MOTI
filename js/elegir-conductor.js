@@ -174,7 +174,7 @@ conductor.estadoServicio ===
 
 "🟡 Ocupado";
 
-  const boton =
+  const htmlBoton =
 
 conductor.estadoServicio ===
 
@@ -224,7 +224,7 @@ Tarifa: $${ruta.tarifa}
 
 </p>
 
-${boton}
+${htmlBoton}
 `;
 
 lista.appendChild(
@@ -233,7 +233,7 @@ tarjeta
 
 );
 
-const boton =
+const btnElegir =
 
 tarjeta.querySelector(
 
@@ -241,9 +241,9 @@ tarjeta.querySelector(
 
 );
 
-if(boton){
+if(btnElegir){
 
-boton.addEventListener(
+btnElegir.addEventListener(
 
 "click",
 
