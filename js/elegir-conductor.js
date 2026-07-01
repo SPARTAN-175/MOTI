@@ -30,6 +30,14 @@ params.get(
 
 );
 
+const nombre =
+
+params.get(
+
+"nombre"
+
+);
+
 const lista =
 
 document.getElementById(
@@ -48,7 +56,7 @@ document.getElementById(
 
 nombreDestino.textContent =
 
-destinoId;
+nombre;
 
 
 
@@ -79,7 +87,7 @@ onSnapshot(
 
 consulta,
 
-(snapshot)=>{
+async (snapshot)=>{
 
 lista.innerHTML="";
 
@@ -166,6 +174,34 @@ conductor.estadoServicio ===
 
 "🟡 Ocupado";
 
+  const boton =
+
+conductor.estadoServicio ===
+
+"disponible"
+
+?
+
+`<button
+class="btn-primary elegir-btn"
+data-conductor="${ruta.conductorId}"
+data-ruta="${ruta.destinoId}"
+data-tarifa="${ruta.tarifa}">
+
+Elegir
+
+</button>`
+
+:
+
+`<button
+class="btn-primary"
+disabled>
+
+No disponible
+
+</button>`;
+
 tarjeta.innerHTML =
 
 `
@@ -188,20 +224,7 @@ Tarifa: $${ruta.tarifa}
 
 </p>
 
-<button
-
-class="btn-primary elegir-btn"
-
-data-conductor="${ruta.conductorId}"
-
-data-ruta="${ruta.destinoId}"
-
-data-tarifa="${ruta.tarifa}">
-
-Elegir
-
-</button>
-
+${boton}
 `;
 
 lista.appendChild(
