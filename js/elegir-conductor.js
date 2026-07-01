@@ -288,6 +288,13 @@ pasajero.uid
 
 const datosPasajero = pasajeroDoc.data();
 
+
+console.log({
+  placa: conductor.placa,
+  latitud: datosPasajero.latitud,
+  longitud: datosPasajero.longitud
+});
+  
 const solicitudRef = await addDoc(
 
 collection(
@@ -330,9 +337,9 @@ fechaSolicitud: serverTimestamp()
 );
 
 console.log("Solicitud creada:", solicitudRef.id);
-
-window.location.href =
-`esperando-conductor.html?id=${solicitudRef.id}`;
+alert("Solicitud creada correctamente");
+//window.location.href =
+//`esperando-conductor.html?id=${solicitudRef.id}`;
 
 }
 catch(error){
