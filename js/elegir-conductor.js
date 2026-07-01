@@ -8,7 +8,9 @@ query,
 where,
 onSnapshot,
 doc,
-getDoc
+getDoc,
+addDoc,
+serverTimestamp
 
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -266,13 +268,42 @@ conductor
 }
 
 
-function seleccionarConductor(
+async function seleccionarConductor(
 
 ruta,
 
 conductor
 
 ){
+  const pasajero =
+
+auth.currentUser;
+
+const pasajeroDoc =
+
+await getDoc(
+
+doc(
+
+db,
+
+"usuarios",
+
+pasajero.uid
+
+)
+
+);
+
+const datosPasajero =
+
+pasajeroDoc.data();
+
+console.log(
+
+datosPasajero
+
+);
 
 console.log(
 
