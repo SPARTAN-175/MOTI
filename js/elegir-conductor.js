@@ -299,29 +299,83 @@ const datosPasajero =
 
 pasajeroDoc.data();
 
-console.log(
+const solicitudRef =
 
-datosPasajero
+await addDoc(
+
+collection(
+
+db,
+
+"solicitudes"
+
+),
+
+{
+
+pasajeroId:
+
+pasajero.uid,
+
+nombrePasajero:
+
+datosPasajero.nombre,
+
+conductorId:
+
+ruta.conductorId,
+
+nombreConductor:
+
+conductor.nombre,
+
+placa:
+
+conductor.placa,
+
+tipoViaje:
+
+"especial",
+
+destinoId:
+
+ruta.destinoId,
+
+destino:
+
+nombre,
+
+tarifa:
+
+ruta.tarifa,
+
+observaciones:
+
+"",
+
+latitud:
+
+datosPasajero.latitud,
+
+longitud:
+
+datosPasajero.longitud,
+
+estado:
+
+"pendiente",
+
+fechaSolicitud:
+
+serverTimestamp()
+
+}
 
 );
 
-console.log(
+window.location.href =
 
-"Conductor seleccionado"
-
-);
-
-console.log(
-
-ruta
-
-);
-
-console.log(
-
-conductor
-
-);
+`esperando-conductor.html?id=${solicitudRef.id}`;
 
 }
 
