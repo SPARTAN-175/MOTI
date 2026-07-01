@@ -4,18 +4,13 @@ from "./firebase-config.js";
 import {
     addDoc,
     collection,
+    getDocs,
     serverTimestamp,
     doc,
     getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-import {
-
-    buscarDestino
-
-}
-from "./destinos/buscar-destino.js";
 
 const btnSolicitar =
 document.getElementById(
@@ -56,108 +51,145 @@ document.getElementById(
 );
 
 
-
-// ========================================
-// BUSCAR DESTINOS ESPECIALES
-// ========================================
+// ================================
+// BUSCAR DESTINOS
+// ================================
 
 buscarDestinoEspecial.addEventListener(
 
-    "input",
+"input",
 
-    async()=>{
-
-        const texto =
-
-        buscarDestinoEspecial.value.trim();
-
-        if(texto.length < 3){
-
-            listaDestinos.style.display =
-
-            "none";
-
-            listaDestinos.innerHTML = "";
-
-            return;
-
-        }
-
-        const resultados =
-
-        await buscarDestino(texto);
-
-        listaDestinos.innerHTML = "";
-
-        resultados.forEach(
-
-            destino=>{
-
-                const item =
-
-                document.createElement("div");
-
-                item.className =
-
-                "item-destino";
-
-                item.innerHTML =
-
-                `📍 ${destino.nombre}`;
-
-                item.addEventListener(
-
-                    "click",
-
-                    ()=>{
-
-                        destinoSeleccionado = destino;
-
-                        buscarDestinoEspecial.value =
-
-                        destino.nombre;
-
-                        listaDestinos.innerHTML = "";
-
-                        listaDestinos.style.display =
-
-                        "none";
-
-                        console.log(
-
-                            destinoSeleccionado
-
-                        );
-
-                    }
-
-                );
-
-                listaDestinos.appendChild(
-
-                    item
-
-                );
-
-            }
-
-        );
-
-        listaDestinos.style.display =
-
-        resultados.length
-
-        ?
-
-        "block"
-
-        :
-
-        "none";
-
-    }
+buscarDestinos
 
 );
+
+async function buscarDestinos(){
+
+const texto=
+
+buscarDestinoEspecial.value
+
+.trim()
+
+.toLowerCase();
+
+listaDestinos.innerHTML="";
+
+if(texto.length<2){
+
+listaDestinos.style.display="none";
+
+return;
+
+}
+
+const snapshot=
+
+await getDocs(
+
+collection(
+
+db,
+
+"destinos"
+
+)
+
+);
+
+const encontrados=[];
+
+snapshot.forEach(doc=>{
+
+const destino=doc.data();
+
+if(
+
+destino.nombre
+
+.toLowerCase()
+
+.includes(texto)
+
+){
+
+encontrados.push({
+
+id:doc.id,
+
+...destino
+
+});
+
+}
+
+});
+
+if(encontrados.length===0){
+
+listaDestinos.style.display="none";
+
+return;
+
+}
+
+listaDestinos.style.display="block";
+
+encontrados.forEach(destino=>{
+
+const item=
+
+document.createElement("div");
+
+item.className=
+
+"item-destino";
+
+item.textContent=
+
+destino.nombre;
+
+item.onclick=()=>{
+
+seleccionarDestino(
+
+destino
+
+);
+
+};
+
+listaDestinos.appendChild(item);
+
+});
+
+}
+
+// ================================
+// DESTINO SELECCIONADO
+// ================================
+
+function seleccionarDestino(destino){
+
+destinoSeleccionado=
+
+destino;
+
+buscarDestinoEspecial.value=
+
+destino.nombre;
+
+listaDestinos.innerHTML="";
+
+listaDestinos.style.display="none";
+
+console.log(
+
+destinoSeleccionado
+
+);
+
+}
 
 
 btnSolicitar.addEventListener(
