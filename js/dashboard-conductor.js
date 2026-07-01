@@ -251,28 +251,53 @@ function actualizarVista(){
 
 function escucharSolicitudes(){
 
-    const q =
-    query(
+    const uid =
 
-        collection(
-            db,
-            "solicitudes"
-        ),
+auth.currentUser.uid;
+    
+   const q =
 
-        where(
-            "estado",
-            "==",
-            "pendiente"
-        ),
+query(
 
-        orderBy(
-            "fecha",
-            "desc"
-        ),
+collection(
 
-        limit(1)
+db,
 
-    );
+"solicitudes"
+
+),
+
+where(
+
+"conductorId",
+
+"==",
+
+uid
+
+),
+
+where(
+
+"estado",
+
+"==",
+
+"pendiente"
+
+),
+
+orderBy(
+
+"fechaSolicitud",
+
+"desc"
+
+),
+
+limit(1)
+
+);
 
     onSnapshot(
 
