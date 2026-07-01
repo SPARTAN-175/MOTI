@@ -267,111 +267,83 @@ conductor
 
 }
 
-
 async function seleccionarConductor(
-
 ruta,
-
 conductor
-
 ){
-  const pasajero =
 
-auth.currentUser;
+try{
 
-const pasajeroDoc =
+const pasajero = auth.currentUser;
 
-await getDoc(
+const pasajeroDoc = await getDoc(
 
 doc(
-
 db,
-
 "usuarios",
-
 pasajero.uid
-
 )
 
 );
 
-const datosPasajero =
+const datosPasajero = pasajeroDoc.data();
 
-pasajeroDoc.data();
-
-const solicitudRef =
-
-await addDoc(
+const solicitudRef = await addDoc(
 
 collection(
-
 db,
-
 "solicitudes"
-
 ),
 
 {
 
-pasajeroId:
+pasajeroId: pasajero.uid,
 
-pasajero.uid,
+nombrePasajero: datosPasajero.nombre,
 
-nombrePasajero:
+conductorId: ruta.conductorId,
 
-datosPasajero.nombre,
+nombreConductor: conductor.nombre,
 
-conductorId:
+placa: conductor.placa,
 
-ruta.conductorId,
+tipoViaje: "especial",
 
-nombreConductor:
+destinoId: ruta.destinoId,
 
-conductor.nombre,
+destino: nombre,
 
-placa:
+tarifa: ruta.tarifa,
 
-conductor.placa,
+observaciones: "",
 
-tipoViaje:
+latitud: datosPasajero.latitud,
 
-"especial",
+longitud: datosPasajero.longitud,
 
-destinoId:
+estado: "pendiente",
 
-ruta.destinoId,
-
-destino:
-
-nombre,
-
-tarifa:
-
-ruta.tarifa,
-
-observaciones:
-
-"",
-
-latitud:
-
-datosPasajero.latitud,
-
-longitud:
-
-datosPasajero.longitud,
-
-estado:
-
-"pendiente",
-
-fechaSolicitud:
-
-serverTimestamp()
+fechaSolicitud: serverTimestamp()
 
 }
 
 );
+
+console.log("Solicitud creada:", solicitudRef.id);
+
+window.location.href =
+`esperando-conductor.html?id=${solicitudRef.id}`;
+
+}
+catch(error){
+
+console.error(error);
+
+alert(error.message);
+
+}
+
+}
 
 window.location.href =
 
