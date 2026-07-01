@@ -103,9 +103,9 @@ requestContent.addEventListener(
             )
         ){
 
-            console.log(
-                "Solicitud rechazada"
-            );
+            rechazarSolicitud(
+    ultimaSolicitud
+);
 
         }
 
@@ -522,6 +522,49 @@ async function aceptarSolicitud(id){
 
         alert(
             "No se pudo aceptar el viaje."
+        );
+
+    }
+
+}
+
+
+
+async function rechazarSolicitud(id){
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "solicitudes",
+                id
+            ),
+
+            {
+
+                estado:
+                "rechazada"
+
+            }
+
+        );
+
+        requestPopup.style.display =
+        "none";
+
+        ultimaSolicitud =
+        null;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "No se pudo rechazar la solicitud."
         );
 
     }
