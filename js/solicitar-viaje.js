@@ -314,6 +314,66 @@ if(tipoViaje==="especial"){
 
 );
 
+// ========================================
+// MOTOR MOTI
+// ========================================
+
+const conductores =
+
+await obtenerConductores();
+
+const resultado =
+
+ejecutarMotor(
+
+    conductores,
+
+    {
+
+        tipoViaje:"local"
+
+    },
+
+    {
+
+        latitud:userData.latitud,
+
+        longitud:userData.longitud
+
+    }
+
+);
+
+console.log(
+
+resultado.log.join("\n")
+
+);
+
+const mejorConductor =
+
+resultado.mejorConductor;
+
+if(!mejorConductor){
+
+    alert(
+
+        "No hay conductores disponibles."
+
+    );
+
+    return;
+
+}
+
+console.log(
+
+"Conductor seleccionado:",
+
+mejorConductor
+
+);            
+
 window.location.href =
 `esperando-conductor.html?id=${solicitudRef.id}`;
 
