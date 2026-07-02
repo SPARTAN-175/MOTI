@@ -286,6 +286,18 @@ if(tipoViaje==="especial"){
         nombrePasajero:
         userData.nombre,
 
+        conductorId:
+
+        mejorConductor.id,
+
+        nombreConductor:
+
+        mejorConductor.nombre,
+
+        placa:
+
+        mejorConductor.placa,
+        
         tipoViaje,
 
         destino:
