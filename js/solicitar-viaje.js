@@ -271,62 +271,7 @@ if(tipoViaje==="especial"){
 
 }
 
-            const solicitudRef = await addDoc(
-
-    collection(
-        db,
-        "solicitudes"
-    ),
-
-    {
-
-        pasajeroId:
-        user.uid,
-
-        nombrePasajero:
-        userData.nombre,
-
-        conductorId:
-
-        mejorConductor.id,
-
-        nombreConductor:
-
-        mejorConductor.nombre,
-
-        placa:
-
-        mejorConductor.placa,
-        
-        tipoViaje,
-
-        destino:
-        tipoViaje === "especial"
-        ?
-        destinoEspecial.value
-        :
-        destino.value.trim(),
-
-        observaciones:
-        observaciones.value.trim(),
-
-        latitud:
-        userData.latitud,
-
-        longitud:
-        userData.longitud,
-
-        estado:
-        "pendiente",
-
-        fecha:
-        serverTimestamp()
-
-    }
-
-);
-
-// ========================================
+        // ========================================
 // MOTOR MOTI
 // ========================================
 
@@ -384,7 +329,66 @@ console.log(
 
 mejorConductor
 
-);            
+);     
+
+
+            
+            const solicitudRef = await addDoc(
+
+    collection(
+        db,
+        "solicitudes"
+    ),
+
+    {
+
+        pasajeroId:
+        user.uid,
+
+        nombrePasajero:
+        userData.nombre,
+
+        conductorId:
+
+        mejorConductor.id,
+
+        nombreConductor:
+
+        mejorConductor.nombre,
+
+        placa:
+
+        mejorConductor.placa,
+        
+        tipoViaje,
+
+        destino:
+        tipoViaje === "especial"
+        ?
+        destinoEspecial.value
+        :
+        destino.value.trim(),
+
+        observaciones:
+        observaciones.value.trim(),
+
+        latitud:
+        userData.latitud,
+
+        longitud:
+        userData.longitud,
+
+        estado:
+        "pendiente",
+
+        fecha:
+        serverTimestamp()
+
+    }
+
+);
+
+       
 
 window.location.href =
 `esperando-conductor.html?id=${solicitudRef.id}`;
