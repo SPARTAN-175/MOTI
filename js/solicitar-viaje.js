@@ -311,6 +311,30 @@ const mejorConductor =
 
 resultado.mejorConductor;
 
+// ========================================
+// LISTA ORDENADA POR MOTI
+// ========================================
+
+const listaConductores =
+
+resultado.grupos
+
+.flat()
+
+.map(
+
+conductor => conductor.id
+
+);
+
+console.log(
+
+"Orden MOTI:",
+
+listaConductores
+
+);
+
 if(!mejorConductor){
 
     alert(
@@ -359,6 +383,14 @@ mejorConductor
         placa:
 
         mejorConductor.placa,
+
+        conductoresEvaluados:
+
+        listaConductores,
+
+        indiceConductor:
+
+        0,
         
         tipoViaje,
 
