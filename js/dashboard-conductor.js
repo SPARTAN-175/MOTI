@@ -534,28 +534,119 @@ async function rechazarSolicitud(id){
 
     try{
 
-        await updateDoc(
+        const solicitudRef =
+
+        doc(
+            db,
+            "solicitudes",
+            id
+        );
+
+        const solicitudSnap =
+
+        await getDoc(
+            solicitudRef
+        );
+
+        if(!solicitudSnap.exists()) return;
+
+        const solicitud =
+
+        solicitudSnap.data();
+
+        const lista =
+
+        solicitud.conductoresEvaluados || [];
+
+        let indice =
+
+        solicitud.indiceConductor || 0;
+
+        indice++;
+
+        // ===================================
+        // YA NO HAY MÁS CONDUCTORES
+        // ===================================
+
+        if(indice >= lista.length){
+
+            await updateDoc(
+
+                solicitudRef,
+
+                {
+
+                    estado:"rechazada"
+
+                }
+
+            );
+
+            requestPopup.style.display="none";
+
+            ultimaSolicitud=null;
+
+            return;
+
+        }
+
+        // ===================================
+        // OBTENER SIGUIENTE CONDUCTOR
+        // ===================================
+
+        const siguienteId =
+
+        lista[indice];
+
+        const conductorSnap =
+
+        await getDoc(
 
             doc(
                 db,
-                "solicitudes",
-                id
-            ),
+                "usuarios",
+                siguienteId
+            )
+
+        );
+
+        if(!conductorSnap.exists()){
+
+            return;
+
+        }
+
+        const conductor =
+
+        conductorSnap.data();
+
+        // ===================================
+        // REASIGNAR
+        // ===================================
+
+        await updateDoc(
+
+            solicitudRef,
 
             {
 
-                estado:
-                "rechazada"
+                conductorId:siguienteId,
+
+                nombreConductor:conductor.nombre,
+
+                placa:conductor.placa,
+
+                indiceConductor:indice,
+
+                estado:"pendiente"
 
             }
 
         );
 
-        requestPopup.style.display =
-        "none";
+        requestPopup.style.display="none";
 
-        ultimaSolicitud =
-        null;
+        ultimaSolicitud=null;
 
     }
 
@@ -563,13 +654,12 @@ async function rechazarSolicitud(id){
 
         console.error(error);
 
-        alert(
-            "No se pudo rechazar la solicitud."
-        );
+        alert("No se pudo reasignar la solicitud.");
 
     }
 
 }
+
 
 async function verificarViajeActivo(){
 
