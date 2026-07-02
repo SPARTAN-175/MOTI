@@ -116,8 +116,16 @@ async function registrarConductor(){
 
                 longitud: null,
 
-                fechaRegistro:
-                new Date().toISOString()
+// ======================
+// ESTADÍSTICAS MOTI
+// ======================
+
+viajesHoy: 0,
+
+viajesTotales: 0,
+
+fechaRegistro:
+new Date().toISOString()
 
             }
         );
