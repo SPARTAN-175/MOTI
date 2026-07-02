@@ -1,3 +1,17 @@
+import {
+
+    obtenerConductores
+
+}
+from "./motor/obtener-conductores.js";
+
+import {
+
+    ejecutarMotor
+
+}
+from "./motor/motor-asignacion.js";
+
 import { auth, db }
 from "./firebase-config.js";
 
