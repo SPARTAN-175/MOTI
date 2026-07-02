@@ -149,3 +149,36 @@ async function actualizarUbicacion(
     }
 
 }
+
+
+// ======================
+// DESTINO SELECCIONADO
+// ======================
+
+const destinoGuardado =
+
+sessionStorage.getItem(
+
+"destinoViaje"
+
+);
+
+if(destinoGuardado){
+
+    const destino =
+
+    JSON.parse(
+
+        destinoGuardado
+
+    );
+
+    console.log(
+
+        "Destino seleccionado:",
+
+        destino
+
+    );
+
+}
