@@ -4,8 +4,8 @@ from "./firebase-config.js";
 import {
 
 doc,
-
-onSnapshot
+onSnapshot,
+updateDoc
 
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -46,6 +46,112 @@ solicitudId
 
 );
 
+// ======================
+// REFERENCIAS HTML
+// ======================
+
+const btnCancelar =
+
+document.getElementById(
+"btnCancelar"
+);
+
+const cancelModal =
+
+document.getElementById(
+"cancelModal"
+);
+
+const btnNoCancelar =
+
+document.getElementById(
+"btnNoCancelar"
+);
+
+const btnConfirmarCancelar =
+
+document.getElementById(
+"btnConfirmarCancelar"
+);
+
+
+// ======================
+// ABRIR MODAL
+// ======================
+
+btnCancelar.addEventListener(
+
+"click",
+
+()=>{
+
+cancelModal.style.display="flex";
+
+}
+
+);
+
+// ======================
+// CERRAR MODAL
+// ======================
+
+btnNoCancelar.addEventListener(
+
+"click",
+
+()=>{
+
+cancelModal.style.display="none";
+
+}
+
+);
+
+// ======================
+// CONFIRMAR CANCELACIÓN
+// ======================
+
+btnConfirmarCancelar.addEventListener(
+
+"click",
+
+async()=>{
+
+try{
+
+await updateDoc(
+
+solicitudRef,
+
+{
+
+estado:"cancelada"
+
+}
+
+);
+
+window.location.href=
+
+"dashboard-pasajero.html";
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+
+"No se pudo cancelar la solicitud."
+
+);
+
+}
+
+}
+
+);
 
 onSnapshot(
 
