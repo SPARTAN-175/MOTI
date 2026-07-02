@@ -41,33 +41,78 @@ export function calcularPuntaje(conductores){
             }
 
             // =====================
-            // ROTACIÓN
-            // =====================
+// ROTACIÓN JUSTA
+// =====================
 
-            if(conductor.minutosSinViaje<=10){
+const viajes =
 
-                puntos +=10;
+conductor.viajesHoy || 0;
 
-            }
+if(viajes===0){
 
-            else if(conductor.minutosSinViaje<=20){
+    puntos +=60;
 
-                puntos +=20;
+}
 
-            }
+else if(viajes===1){
 
-            else if(conductor.minutosSinViaje<=40){
+    puntos +=55;
 
-                puntos +=40;
+}
 
-            }
+else if(viajes===2){
 
-            else{
+    puntos +=50;
 
-                puntos +=60;
+}
 
-            }
+else if(viajes===3){
 
+    puntos +=45;
+
+}
+
+else if(viajes===4){
+
+    puntos +=40;
+
+}
+
+else if(viajes===5){
+
+    puntos +=35;
+
+}
+
+else if(viajes===6){
+
+    puntos +=30;
+
+}
+
+else if(viajes===7){
+
+    puntos +=25;
+
+}
+
+else if(viajes===8){
+
+    puntos +=20;
+
+}
+
+else if(viajes===9){
+
+    puntos +=15;
+
+}
+
+else{
+
+    puntos +=10;
+
+}
             conductor.puntaje = puntos;
 
         }
