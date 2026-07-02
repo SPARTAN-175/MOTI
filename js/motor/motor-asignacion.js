@@ -215,48 +215,42 @@ export function ejecutarMotor(
 
 
 
-    return{
+   return{
 
-        grupos,
+    mejorConductor:
 
+    candidatos.length > 0
 
+    ?
 
-        log,
+    candidatos[0]
 
+    :
 
+    null,
 
-        estadisticas:{
+    grupos,
 
-            registrados:
+    log,
 
-            conductores.length,
+    estadisticas:{
 
+        registrados:
+        conductores.length,
 
+        disponibles:
+        disponibles.length,
 
-            disponibles:
+        radio:
+        resultadoRadio.radio,
 
-            disponibles.length,
+        candidatos:
+        candidatos.length,
 
+        grupos:
+        grupos.length
 
+    }
 
-            radio:
-
-            resultadoRadio.radio,
-
-
-
-            candidatos:
-
-            candidatos.length,
-
-
-
-            grupos:
-
-            grupos.length
-
-        }
-
-    };
-
+};
 }
