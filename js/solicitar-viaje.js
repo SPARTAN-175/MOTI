@@ -381,7 +381,7 @@ mejorConductor
         estado:
         "pendiente",
 
-        fecha:
+        fechaSolicitud:
         serverTimestamp()
 
     }
