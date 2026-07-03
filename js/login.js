@@ -6,7 +6,8 @@ import {
 
 import {
     doc,
-    getDoc
+    getDoc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
@@ -92,6 +93,22 @@ async function iniciarSesion(){
         }
 
        if(usuario.tipo === "conductor"){
+
+    await updateDoc(
+
+        doc(
+            db,
+            "usuarios",
+            uid
+        ),
+
+        {
+
+            estadoServicio:"disponible"
+
+        }
+
+    );
 
     window.location.href =
     "dashboard-conductor.html";
