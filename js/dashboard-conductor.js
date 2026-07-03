@@ -85,6 +85,8 @@ let temporizador = null;
 
 let segundosRestantes = 15;
 
+let listenerSolicitud = null;
+
 requestContent.addEventListener(
     "click",
     (e)=>{
@@ -459,6 +461,52 @@ if(datos.fecha){
 `;
     requestPopup.style.display =
     "block";
+
+    // ===================================
+// ESCUCHAR CAMBIOS DE ESTA SOLICITUD
+// ===================================
+
+if(listenerSolicitud){
+
+    listenerSolicitud();
+
+}
+
+listenerSolicitud = onSnapshot(
+
+    doc(
+        db,
+        "solicitudes",
+        id
+    ),
+
+    (docSnap)=>{
+
+        if(!docSnap.exists()) return;
+
+        const datos = docSnap.data();
+
+        if(datos.estado !== "pendiente"){
+
+            clearInterval(temporizador);
+
+            requestPopup.style.display = "none";
+
+            ultimaSolicitud = null;
+
+            if(listenerSolicitud){
+
+                listenerSolicitud();
+
+                listenerSolicitud = null;
+
+            }
+
+        }
+
+    }
+
+);
 
     console.log("Botón encontrado:",
 document.querySelector(".accept-trip"));
