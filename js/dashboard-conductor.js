@@ -472,6 +472,8 @@ async function aceptarSolicitud(id){
         auth.currentUser.uid;
 
         // Actualizar solicitud
+        
+        clearInterval(temporizador);
 
         await updateDoc(
 
@@ -558,15 +560,13 @@ function iniciarTemporizador(solicitudId){
 
         if(segundosRestantes < 0){
 
-            clearInterval(temporizador);
+    clearInterval(temporizador);
 
-            console.log(
+    console.log("Tiempo agotado");
 
-                "Tiempo agotado"
+    rechazarSolicitud(solicitudId);
 
-            );
-
-        }
+}
 
     },1000);
 
@@ -578,6 +578,8 @@ function iniciarTemporizador(solicitudId){
 
 async function rechazarSolicitud(id){
 
+    clearInterval(temporizador);
+   
     try{
 
         const solicitudRef =
