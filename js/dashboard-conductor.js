@@ -81,6 +81,10 @@ continueTrip.addEventListener(
 let ultimaSolicitud =
 null;
 
+let temporizador = null;
+
+let segundosRestantes = 15;
+
 requestContent.addEventListener(
     "click",
     (e)=>{
@@ -336,6 +340,9 @@ limit(1)
                 solicitud.id,
                 solicitud.data()
             );
+            iniciarTemporizador(
+             solicitud.id
+            );
 
         }
 
@@ -527,7 +534,46 @@ async function aceptarSolicitud(id){
     }
 
 }
+        // ===================================
+        // INICIAR TEMPORIZADOR
+        // ===================================
 
+function iniciarTemporizador(solicitudId){
+
+    clearInterval(temporizador);
+
+    segundosRestantes = 15;
+
+    temporizador = setInterval(()=>{
+
+        console.log(
+
+            "Tiempo:",
+
+            segundosRestantes
+
+        );
+
+        segundosRestantes--;
+
+        if(segundosRestantes < 0){
+
+            clearInterval(temporizador);
+
+            console.log(
+
+                "Tiempo agotado"
+
+            );
+
+        }
+
+    },1000);
+
+}
+        // ===================================
+        // RECHAZAR SOLICITUD
+        // ===================================
 
 
 async function rechazarSolicitud(id){
