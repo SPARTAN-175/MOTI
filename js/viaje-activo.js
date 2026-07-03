@@ -726,6 +726,8 @@ async function finalizarViaje(){
 
         );
 
+        console.log("Actualizando estadísticas del conductor...");
+
         await updateDoc(
 
             doc(
@@ -738,11 +740,16 @@ async function finalizarViaje(){
 
                 estadoServicio:"disponible",
 
-                viajeActivo:null
+                viajeActivo:null,
+            
+                viajesHoy: increment(1),
+                
+                viajesTotales: increment(1)
 
             }
 
         );
+        console.log("Estadísticas actualizadas correctamente");
 
         console.log("Redirigiendo...");
 
