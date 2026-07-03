@@ -267,7 +267,14 @@ conductor
 
 }
 
-// ========================================
+
+
+async function seleccionarConductor(
+ruta,
+conductor
+){
+
+  // ========================================
 // VERIFICAR DISPONIBILIDAD EN TIEMPO REAL
 // ========================================
 
@@ -302,13 +309,6 @@ if(datosConductor.estadoServicio !== "disponible"){
     return;
 
 }
-
-
-
-async function seleccionarConductor(
-ruta,
-conductor
-){
 
 try{
 
