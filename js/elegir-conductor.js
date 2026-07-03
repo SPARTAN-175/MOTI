@@ -267,6 +267,44 @@ conductor
 
 }
 
+// ========================================
+// VERIFICAR DISPONIBILIDAD EN TIEMPO REAL
+// ========================================
+
+const conductorActual = await getDoc(
+
+    doc(
+        db,
+        "usuarios",
+        ruta.conductorId
+    )
+
+);
+
+if(!conductorActual.exists()){
+
+    alert("El conductor ya no existe.");
+
+    return;
+
+}
+
+const datosConductor = conductorActual.data();
+
+if(datosConductor.estadoServicio !== "disponible"){
+
+    alert(
+
+        "Este conductor ya no está disponible.\nSelecciona otro."
+
+    );
+
+    return;
+
+}
+
+
+
 async function seleccionarConductor(
 ruta,
 conductor
