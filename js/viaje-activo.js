@@ -467,26 +467,73 @@ L.marker(
 .addTo(map)
 .bindPopup("Tú");
 
-   pasajeroMarker =
+  // =========================
+// PASAJERO O DESTINO
+// =========================
+
+const icono =
+
+viajeActual.estado === "en_viaje"
+
+?
+
+destinoIcon
+
+:
+
+pasajeroIcon;
+
+const texto =
+
+viajeActual.estado === "en_viaje"
+
+?
+
+"Destino"
+
+:
+
+viajeActual.nombrePasajero;
+
+const posicion =
+
+viajeActual.estado === "en_viaje"
+
+?
+
+[
+
+    viajeActual.destinoLatitud,
+
+    viajeActual.destinoLongitud
+
+]
+
+:
+
+pasajeroPos;
+
+pasajeroMarker =
+
 L.marker(
 
-    pasajeroPos,
+    posicion,
 
     {
 
-        icon:
-        pasajeroIcon
+        icon:icono
 
     }
 
 )
+
 .addTo(map)
+
 .bindPopup(
 
-    viajeActual.nombrePasajero
+    texto
 
 );
-
 
 
 dibujarRuta(
