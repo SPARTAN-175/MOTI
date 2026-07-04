@@ -50,6 +50,15 @@ const pasajeroIcon = L.icon({
 
 });
 
+const destinoIcon = L.icon({
+
+    iconUrl:"../assets/icons/destino.svg",
+
+    iconSize:[38,38],
+
+    iconAnchor:[19,19]
+
+});
 
 // ========================================
 // ID DEL VIAJE
@@ -182,54 +191,93 @@ if(viaje.estado === "finalizada"){
 
         
 
-        // =========================
-        // PASAJERO
-        // =========================
+       // =========================
+// PASAJERO O DESTINO
+// =========================
 
-        const pasajeroPos=[
+const pasajeroPos =
 
-            viaje.latitud,
+viaje.estado === "en_viaje"
 
-            viaje.longitud
+?
 
-        ];
+[
 
-        if(!pasajeroMarker){
+    viaje.destinoLatitud,
 
-            pasajeroMarker=
+    viaje.destinoLongitud
 
-            L.marker(
+]
 
-                pasajeroPos,
+:
 
-                {
+[
 
-                    icon:pasajeroIcon
+    viaje.latitud,
 
-                }
+    viaje.longitud
 
-            )
+];
 
-            .addTo(map)
+const icono =
 
-            .bindPopup(
+viaje.estado === "en_viaje"
 
-                "Tú"
+?
 
-            );
+destinoIcon
+
+:
+
+pasajeroIcon;
+
+const texto =
+
+viaje.estado === "en_viaje"
+
+?
+
+"Destino"
+
+:
+
+"Tú";
+
+if(!pasajeroMarker){
+
+    pasajeroMarker =
+
+    L.marker(
+
+        pasajeroPos,
+
+        {
+
+            icon:icono
 
         }
 
-        else{
+    )
 
-            pasajeroMarker.setLatLng(
+    .addTo(map)
 
-                pasajeroPos
+    .bindPopup(
 
-            );
+        texto
 
-        }
+    );
 
+}
+
+else{
+
+    pasajeroMarker.setLatLng(
+
+        pasajeroPos
+
+    );
+
+}
         // =========================
         // CONDUCTOR
         // =========================
@@ -429,19 +477,37 @@ function escucharMovimientoConductor(conductorId){
 
             );
 
-            dibujarRuta(
+            let destinoRuta = [
 
-                nuevaPos,
+    pasajeroMarker.getLatLng().lat,
 
-                [
+    pasajeroMarker.getLatLng().lng
 
-                    pasajeroMarker.getLatLng().lat,
+];
 
-                    pasajeroMarker.getLatLng().lng
+if(
 
-                ]
+    estadoViaje.textContent === "en_viaje"
 
-            );
+){
+
+    destinoRuta = [
+
+        pasajeroMarker.getLatLng().lat,
+
+        pasajeroMarker.getLatLng().lng
+
+    ];
+
+}
+
+dibujarRuta(
+
+    nuevaPos,
+
+    destinoRuta
+
+);
 
         }
 
