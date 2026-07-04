@@ -56,6 +56,7 @@ document.getElementById(
 "nombreDestino"
 
 );
+const listenersConductores = {};
 
 nombreDestino.textContent =
 
@@ -86,53 +87,34 @@ true
 
 );
 
-onSnapshot(
+if(!listenersConductores[ruta.conductorId]){
 
-consulta,
+    listenersConductores[ruta.conductorId] =
 
-async (snapshot)=>{
+    onSnapshot(
 
-lista.innerHTML="";
+        doc(
+            db,
+            "usuarios",
+            ruta.conductorId
+        ),
 
-for(const rutaDoc of snapshot.docs){
+        (conductorDoc)=>{
 
-const ruta =
+            if(!conductorDoc.exists()) return;
 
-rutaDoc.data();
+            const conductor = conductorDoc.data();
 
-const conductorDoc =
+            crearTarjeta(
+                ruta,
+                conductor
+            );
 
-await getDoc(
+        }
 
-doc(
-
-db,
-
-"usuarios",
-
-ruta.conductorId
-
-)
-
-);
-
-if(!conductorDoc.exists()){
-
-continue;
+    );
 
 }
-
-const conductor =
-
-conductorDoc.data();
-
-crearTarjeta(
-
-ruta,
-
-conductor
-
-);
 
 }
 
@@ -151,17 +133,27 @@ conductor
 
 ){
 
-const tarjeta =
+const idTarjeta = `card-${ruta.conductorId}`;
 
-document.createElement(
+let tarjeta =
 
-"div"
+document.getElementById(idTarjeta);
 
-);
+if(!tarjeta){
 
-tarjeta.className=
+    tarjeta =
 
-"route-card";
+    document.createElement("div");
+
+    tarjeta.id = idTarjeta;
+
+    tarjeta.className =
+
+    "route-card";
+
+    lista.appendChild(tarjeta);
+
+}
 
 const estado =
 
@@ -230,11 +222,6 @@ Tarifa: $${ruta.tarifa}
 ${htmlBoton}
 `;
 
-lista.appendChild(
-
-tarjeta
-
-);
 
 const btnElegir =
 
