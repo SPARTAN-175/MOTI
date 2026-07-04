@@ -326,6 +326,32 @@ pasajero.uid
 );
 
 const datosPasajero = pasajeroDoc.data();
+
+  // ========================================
+// OBTENER COORDENADAS DEL DESTINO
+// ========================================
+
+const destinoDoc = await getDoc(
+
+    doc(
+        db,
+        "destinos",
+        ruta.destinoId
+    )
+
+);
+
+if(!destinoDoc.exists()){
+
+    alert(
+        "No se encontró el destino."
+    );
+
+    return;
+
+}
+
+const datosDestino = destinoDoc.data();
   
 const solicitudRef = await addDoc(
 
@@ -359,6 +385,14 @@ observaciones: "",
 latitud: datosPasajero.latitud,
 
 longitud: datosPasajero.longitud,
+
+destinoLatitud:
+
+datosDestino.latitud,
+
+destinoLongitud:
+
+datosDestino.longitud,
 
 estado: "pendiente",
 
