@@ -229,6 +229,22 @@ await getDoc(
 const userData =
 userDoc.data();
 
+            // ========================================
+// DESTINO SELECCIONADO EN EL MAPA
+// ========================================
+
+const destinoMapa =
+
+JSON.parse(
+
+    sessionStorage.getItem(
+
+        "destinoViaje"
+
+    )
+
+);
+
             if(!user){
 
                 alert(
@@ -409,6 +425,14 @@ mejorConductor
 
         longitud:
         userData.longitud,
+
+        destinoLatitud:
+
+destinoMapa?.latitud || null,
+
+destinoLongitud:
+
+destinoMapa?.longitud || null,
 
         estado:
         "pendiente",
