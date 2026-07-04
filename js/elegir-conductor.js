@@ -86,39 +86,52 @@ true
 )
 
 );
+onSnapshot(
 
-if(!listenersConductores[ruta.conductorId]){
+    consulta,
 
-    listenersConductores[ruta.conductorId] =
+    async(snapshot)=>{
 
-    onSnapshot(
+        lista.innerHTML = "";
 
-        doc(
-            db,
-            "usuarios",
-            ruta.conductorId
-        ),
+        for(const rutaDoc of snapshot.docs){
 
-        (conductorDoc)=>{
+            const ruta = rutaDoc.data();
 
-            if(!conductorDoc.exists()) return;
+            if(!listenersConductores[ruta.conductorId]){
 
-            const conductor = conductorDoc.data();
+                listenersConductores[ruta.conductorId] =
 
-            crearTarjeta(
-                ruta,
-                conductor
-            );
+                onSnapshot(
+
+                    doc(
+                        db,
+                        "usuarios",
+                        ruta.conductorId
+                    ),
+
+                    (conductorDoc)=>{
+
+                        if(!conductorDoc.exists()) return;
+
+                        const conductor = conductorDoc.data();
+
+                        crearTarjeta(
+                            ruta,
+                            conductor
+                        );
+
+                    }
+
+                );
+
+            }
 
         }
 
-    );
+    }
 
-}
-
-}
-
-});
+);
 
 
 // ========================================
