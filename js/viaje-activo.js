@@ -567,17 +567,39 @@ function escucharMovimientoConductor(){
                 
 );
 
-            dibujarRuta(
+            let destinoRuta = [
+
+    viajeActual.latitud,
+
+    viajeActual.longitud
+
+];
+
+// =======================
+// SI YA INICIÓ EL VIAJE
+// =======================
+
+if(
+
+    viajeActual.estado === "en_viaje"
+
+){
+
+    destinoRuta = [
+
+        viajeActual.destinoLatitud,
+
+        viajeActual.destinoLongitud
+
+    ];
+
+}
+
+dibujarRuta(
 
     nuevaPos,
 
-    [
-
-        viajeActual.latitud,
-
-        viajeActual.longitud
-
-    ]
+    destinoRuta
 
 );
 
